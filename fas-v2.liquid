@@ -434,7 +434,6 @@
 	const $popup = document.querySelector('#popup-div');
 	const $popupZip = document.querySelector("#popup-zip-div");
 	const $searchBarWrapper = document.querySelector('#fas-loc-search-button-wrapper');
-	const $searchBarButtonInner = document.querySelector('#fas-loc-search-button-inner');
 	const $searchBarButton = document.querySelector('#fas-loc-search-button');
 	const $searchBar = document.querySelector('#fas-loc-search');
 	
@@ -1011,14 +1010,6 @@
 	$searchBar.addEventListener('input', (e) => {
 	    e.preventDefault();
 	    if(e.data != null && (!e.data.match(/^[0-9]$/) || $searchBar.value.length > 5)) $searchBar.value = $searchBar.value.slice(0, -1)
-	})
-	  
-	$searchBarWrapper.addEventListener('mouseover', (e) => {
-		$searchBarButtonInner.classList.add("button-hovered");
-	})
-	
-	$searchBarWrapper.addEventListener('mouseout', (e) => {
-		$searchBarButtonInner.classList.remove("button-hovered");
 	})
 	  
 	// adds event listener to open zip input form

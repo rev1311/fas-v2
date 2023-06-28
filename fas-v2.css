@@ -153,7 +153,7 @@ img {
 }
 
 #fas-loc-search {
-    width: 125px;
+    width: 200px;
     height: auto;
     min-height: 35px;
     vertical-align: middle;
@@ -161,7 +161,7 @@ img {
     font-size: 18px;
     font-weight: 400;
     border-radius: 16px;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: #fff;
     display: inline;
     margin: 0 0px 7px 0px; 
     padding-bottom: 1px;
@@ -176,7 +176,7 @@ img {
     cursor: pointer;
 }
 #fas-loc-search-button {
-    background-image: url('https://cdn.shopify.com/s/files/1/1921/1117/files/search-icon2.png?v=167769830');
+    background-image: url('https://cdn.shopify.com/s/files/1/1921/1117/files/search-icon2.png?v=1677698308');
     background-repeat: no-repeat;
     background-position: center center;
     position: absolute;
@@ -313,12 +313,11 @@ path.state-selected.state-selected-transient {
     place-content: end left;
     position: relative;
     padding: 30px;
-    background-image: url("https://cdn.shopify.com/s/files/1/1921/1117/files/ConcordStore.png?v=1677712581");
+    background-image: url("https://cdn.shopify.com/s/files/1/1921/1117/files/OurStory-Banner-dark-skinner-min.png?v=1681326470");
     background-repeat: no-repeat;
     background-position: top left;
     height: 158px;
     margin-bottom: 20px;
-    animation: backgroundScroll 360s linear 1s infinite;
 }
 #fas-grid-container--header::before {
     background-image: linear-gradient(to top right, #1a1a1a, transparent);
@@ -374,6 +373,7 @@ path.state-selected.state-selected-transient {
 }
 
 #fas-grid-container--map {
+  display: none;
     position: relative;
     top: 0;
     left: -60px;

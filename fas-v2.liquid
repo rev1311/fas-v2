@@ -4,14 +4,20 @@
 
 <div id="fas-grid-container--header">
 	<a href="https://www.{{shop.domain}}/pages/stores"><p id="fas-grid--header-text">Find A Store</p></a>
-  	<div id="fas-grid-container--search">
+</div>
+
+
+
+<div id="fas-grid-container--main">
+	<div id="fas-grid-container--search">
 		<div class="fas-search-container">
-			<label for="fas-loc-search" class="fas-store-title select-state center"></label>
+			<label for="fas-loc-search" class="fas-store-title select-state center">Select a state or search by zipcode </label>
 			<div id="fas-loc-search-button-wrapper">
+				<div id="fas-loc-search-button-inner"></div>
 				<div id="fas-loc-search-button" class="fas-search-bar-button"></div>
 			</div>
 			<div>
-				<input id="fas-loc-search" type="text" placeholder="Enter Your ZIP">
+				<input id="fas-loc-search" type="text" placeholder="">
 				<div class="popup"><span class="popuptext-zip" id="popup-div"></span></div>
 				<div class="popup"><span class="popuptext-zip" id="popup-zip-div">Enter Zip First</span></div>
 			</div>
@@ -24,12 +30,6 @@
 			</select>
 		</div>
 	</div>
-</div>
-
-
-
-<div id="fas-grid-container--main">
-
 
 
     <div id="fas-grid-container--map">
@@ -434,6 +434,7 @@
 	const $popup = document.querySelector('#popup-div');
 	const $popupZip = document.querySelector("#popup-zip-div");
 	const $searchBarWrapper = document.querySelector('#fas-loc-search-button-wrapper');
+	const $searchBarButtonInner = document.querySelector('#fas-loc-search-button-inner');
 	const $searchBarButton = document.querySelector('#fas-loc-search-button');
 	const $searchBar = document.querySelector('#fas-loc-search');
 	
@@ -1010,6 +1011,14 @@
 	$searchBar.addEventListener('input', (e) => {
 	    e.preventDefault();
 	    if(e.data != null && (!e.data.match(/^[0-9]$/) || $searchBar.value.length > 5)) $searchBar.value = $searchBar.value.slice(0, -1)
+	})
+	  
+	$searchBarWrapper.addEventListener('mouseover', (e) => {
+		$searchBarButtonInner.classList.add("button-hovered");
+	})
+	
+	$searchBarWrapper.addEventListener('mouseout', (e) => {
+		$searchBarButtonInner.classList.remove("button-hovered");
 	})
 	  
 	// adds event listener to open zip input form

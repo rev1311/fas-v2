@@ -305,7 +305,7 @@ path.state-selected.state-selected-transient {
 }
 
 #us-map {
-    display: block;
+    display: none;
     position: absolute;
     top: 0;
     left: -60px;
@@ -345,7 +345,7 @@ path.state-selected.state-selected-transient {
 }
 #fas-grid-container--main {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 0% 100%;
     grid-auto-rows: minmax(40px, auto);
     gap: 0px 0px;
 

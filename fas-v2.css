@@ -533,9 +533,9 @@ th {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     z-index: 5;
-    min-height: 800px;
+    min-height: 50px;
     width: 75%;
-    margin-bottom: 30px;
+    margin: 30px auto;
 	transition: 0.3s ease;
 	opacity: 0;
     text-align: center;

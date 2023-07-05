@@ -362,14 +362,6 @@ path.state-selected.state-selected-transient {
     grid-row: 1 / 2;
 }
 
-#fas-grid-container--search2 {
-    display: flex;
-    height: 40px;
-    place-content: start start;
-    grid-column: 2 / -1;
-    grid-row: 1 / 2;
-}
-
 #fas-grid-container--map {
     position: relative;
     top: 0;
@@ -691,10 +683,6 @@ th {
         place-content: center center;
         grid-column: 1 / -1;
         grid-row: 1 / 2;
-    }
-
-    #fas-grid-container--search2 {
-        display: none;
     }
     #fas-grid-container--map {
         grid-column: 1 / -1;

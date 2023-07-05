@@ -327,15 +327,14 @@ path.state-selected.state-selected-transient {
 #fas-grid-container--header {
     display: flex;
     flex-wrap: wrap;
-    place-content: end left;
+    place-content: center center;
     position: relative;
     padding: 30px;
-    background-image: url("https://cdn.shopify.com/s/files/1/1921/1117/files/ConcordStore.png?v=1677712581");
+    background-image: url("https://cdn.shopify.com/s/files/1/1921/1117/files/OurStory-Banner-dark-skinner-min.png?v=1681326470");
     background-repeat: no-repeat;
     background-position: top left;
     height: 158px;
     margin-bottom: 20px;
-    animation: backgroundScroll 360s linear 1s infinite;
 }
 #fas-grid-container--header::before {
     background-image: linear-gradient(to top right, #1a1a1a, transparent);
@@ -345,11 +344,6 @@ path.state-selected.state-selected-transient {
     top: 0;
     left: 0;
     width: 100%;
-}
-@keyframes backgroundScroll {
-    0% { background-position: top left; }
-    50% { background-position: top right; }
-    100% { background-position: top left; }
 }
 #fas-grid--header-text {
     font-family: Gilroy,Avenir Next Rounded,Helvetica Neue,Helvetica,Arial;

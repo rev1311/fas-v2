@@ -340,9 +340,10 @@ path.state-selected.state-selected-transient {
 }
 #fas-grid-container--main {
     display: grid;
-    grid-template-columns: 0% 100%;
+    grid-template-columns: 0% 90%;
     grid-auto-rows: minmax(40px, auto);
     gap: 0px 0px;
+    justify-content: center;
 
     -webkit-transition: height .25s ease;
     -moz-transition: height .25s ease;

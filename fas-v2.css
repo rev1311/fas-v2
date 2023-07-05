@@ -518,13 +518,24 @@ th {
     width: 100%;
 }
 
-#fas-about-us {
+#fas-description {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     z-index: 5;
     height: auto;
     width: 50%;
     margin: 30px auto;
+	transition: 0.3s ease;
+	opacity: 0;
+    text-align: center;
+}
+#fas-about-us {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    z-index: 5;
+    min-height: 800px;
+    width: 75%;
+    margin-bottom: 30px;
 	transition: 0.3s ease;
 	opacity: 0;
     text-align: center;

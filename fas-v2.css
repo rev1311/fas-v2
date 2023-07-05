@@ -367,7 +367,7 @@ path.state-selected.state-selected-transient {
 }
 #fas-grid-container--tiles {
     grid-column: 2 / 3;
-    grid-row: 1 / 3;
+    grid-row: 2 / 3;
     z-index: 5;
     min-height: 800px;
     margin-bottom: 30px;
@@ -519,14 +519,15 @@ th {
 }
 
 #fas-about-us {
-    position: relative;
-    top: 33%;
-    left: 50%;
-    transform: translate( -50%, -50%);
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    z-index: 5;
+    height: auto;
+    width: 50%;
+    margin: 30px auto;
 	transition: 0.3s ease;
 	opacity: 0;
     text-align: center;
-    width: 75%;
 }
 
 #fas-about-us:first-child {

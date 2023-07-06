@@ -835,7 +835,6 @@
 		var phone = `<p class="store-phone" phoneLink="tel:${store.PhoneNumber}">${store.PhoneNumber}</p>`;
   		if(store["Closed Reason"] != null) {
 			phone = "<p>" + store["Closed Reason"] + "</p>";
-            //phone = "<p>Temporarily Closed</p>";
 		}
 		const storeCardMarkup = `
 			<div class="fas-store-card">

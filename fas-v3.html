@@ -421,9 +421,217 @@
 
 
 <script>
+	let stateAbbr = []
+	
+	const mobileSelector = document.querySelector('#store-state-selector');
+	const storePageContainer = document.querySelector('#store-page-modal');
+	const storeLocationsContainer = document.querySelector("#store-locations-container");
+	const aboutUs = document.querySelector("#fas-about-us");
+	//const searchLabel = document.querySelector("#fas-loc-search-label");
+	//if(window.innerWidth < 799) searchLabel.innerText = "Select a state or search by zipcode"
+
+	const $popup = document.querySelector('#popup-div');
+	const $popupZip = document.querySelector("#popup-zip-div");
+	const $searchBarWrapper = document.querySelector('#fas-loc-search-button-wrapper');
+	const $searchBarButtonInner = document.querySelector('#fas-loc-search-button-inner');
+	const $searchBarButton = document.querySelector('#fas-loc-search-button');
+	const $searchBar = document.querySelector('#fas-loc-search');
+	
+	const currentDate = new Date();
+	const currentDateName = currentDate.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase();
+	const currentHour = currentDate.getHours();
+	const currentDateFormatted = (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
+	const weekdayMap = new Map();
+	
+	var startOfWeek = new Date();
+	//	Decrement until we reach monday, the start of our week (Sunday is 0 index, but we list Monday first)
+	while(startOfWeek.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase() != "monday") {
+		startOfWeek.setDate(startOfWeek.getDate() - 1);
+	}
+	
+//	Create a hashmap of the week starting on monday that will be used to get regular or holiday hours for the week
+//	Key: {weekdayName, e.g. "monday"}
+//	Value: {Javascript Date}
+	dateIncrementer = new Date(startOfWeek);
+	for(var i = 0; i < 7; i++) {
+		weekdayMap.set(dateIncrementer.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase(), new Date(dateIncrementer));
+		dateIncrementer.setDate(dateIncrementer.getDate() + 1);
+	}
+	
+	var $url = new URL(document.URL);
+	const stateQueryParam = String($url.searchParams.get("state"));
+	const storeQueryParam = String($url.searchParams.get("store"));
+	// var shippingNetwork = Cookies.get("cypress_shippingNetwork") != null ? JSON.parse(Cookies.get("cypress_shippingNetwork")) : null;
+	
+	var stores = {};
+	var activeStateContainer;
+	var activeStores = [];
+	var activeState;
+	var transitionLock = false;
+	var firstPass = true;
+	
+	const INSUFFICIENT_ZIP_ERROR = "Please enter 5 characters, leading with zeros if necessary";
+	const MALFORMED_ZIP_ERROR = "Invalid zipcode";
+	
+	const timer = ms => new Promise(res => setTimeout(res, ms));
+	
+	// if(shippingNetwork) {
+	// 	$searchBar.value = shippingNetwork.destinationZipcode;
+	// }
+	$searchBar.focus();
+	setTimeout(function(){ $searchBar.selectionStart = $searchBar.selectionEnd = 6; }, 0);
+	
+	// fetch("https://sdecommerceapi.azurewebsites.net/getStoreList")
+	// 	.then(response => response.json())
+	// 	.then(storeList => {
+	// 		stores = storeList;
+	//         if(storeList.hasOwnProperty(stateQueryParam) && storeList[stateQueryParam].stores.hasOwnProperty(storeQueryParam)) {
+	//     	//	If the URL already has a valid query, present that store	
+	//     		buildStorePage();
+	// 		}
+	//         buildInfrastructure(stores)
+	// 	});
+
+
 	const data = {
 		AZ: {
-			name: Arizona,
+			name: "Arizona",
+			stores: {
+				glendale: {
+					AddressOne: "7540 West Bell Road",
+					Brand: "SD",
+					Brand_Name: "Scandinavian Designs",
+					City: "Glendale",
+					Division: "Dupont",
+					Division_Name: "74 - DuPont",
+					Domain: "scandinaviandesigns",
+					Email: "glendale@scandinaviandesigns.com",
+					Handle: "glendale",
+					Latitude: 33.639759,
+					Longitude: -112.221718,
+					Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+					Name: "Glendale",
+					PhoneNumber: "(602) 344-9874",
+					State: "AZ",
+					State_Name: "Arizona",
+					States: "AZ",
+					Status: "Active",
+					Store: "22 - Glendale"
+				},
+				mesa: {
+					AddressOne: "7540 West Bell Road",
+					Brand: "SD",
+					Brand_Name: "Scandinavian Designs",
+					City: "Mesa",
+					Division: "Dupont",
+					Division_Name: "74 - DuPont",
+					Domain: "scandinaviandesigns",
+					Email: "glendale@scandinaviandesigns.com",
+					Handle: "mesa",
+					Latitude: 33.639759,
+					Longitude: -112.221718,
+					Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+					Name: "Mesa",
+					PhoneNumber: "(602) 344-9874",
+					State: "AZ",
+					State_Name: "Arizona",
+					States: "AZ",
+					Status: "Active",
+					Store: "22 - Glendale"
+				},
+				phoenix: {
+					AddressOne: "7540 West Bell Road",
+					Brand: "SD",
+					Brand_Name: "Scandinavian Designs",
+					City: "Phoenix",
+					Division: "Dupont",
+					Division_Name: "74 - DuPont",
+					Domain: "scandinaviandesigns",
+					Email: "glendale@scandinaviandesigns.com",
+					Handle: "phoenix",
+					Latitude: 33.639759,
+					Longitude: -112.221718,
+					Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+					Name: "Phoenix",
+					PhoneNumber: "(602) 344-9874",
+					State: "AZ",
+					State_Name: "Arizona",
+					States: "AZ",
+					Status: "Active",
+					Store: "22 - Glendale"
+				}
+			}
+		},
+		MI: {
+			name: "Arizona",
+			stores: {
+				glendale: {
+					AddressOne: "7540 West Bell Road",
+					Brand: "SD",
+					Brand_Name: "Scandinavian Designs",
+					City: "Glendale",
+					Division: "Dupont",
+					Division_Name: "74 - DuPont",
+					Domain: "scandinaviandesigns",
+					Email: "glendale@scandinaviandesigns.com",
+					Handle: "glendale",
+					Latitude: 33.639759,
+					Longitude: -112.221718,
+					Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+					Name: "Glendale",
+					PhoneNumber: "(602) 344-9874",
+					State: "AZ",
+					State_Name: "Arizona",
+					States: "AZ",
+					Status: "Active",
+					Store: "22 - Glendale"
+				},
+				mesa: {
+					AddressOne: "7540 West Bell Road",
+					Brand: "SD",
+					Brand_Name: "Scandinavian Designs",
+					City: "Mesa",
+					Division: "Dupont",
+					Division_Name: "74 - DuPont",
+					Domain: "scandinaviandesigns",
+					Email: "glendale@scandinaviandesigns.com",
+					Handle: "mesa",
+					Latitude: 33.639759,
+					Longitude: -112.221718,
+					Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+					Name: "Mesa",
+					PhoneNumber: "(602) 344-9874",
+					State: "AZ",
+					State_Name: "Arizona",
+					States: "AZ",
+					Status: "Active",
+					Store: "22 - Glendale"
+				},
+				phoenix: {
+					AddressOne: "7540 West Bell Road",
+					Brand: "SD",
+					Brand_Name: "Scandinavian Designs",
+					City: "Phoenix",
+					Division: "Dupont",
+					Division_Name: "74 - DuPont",
+					Domain: "scandinaviandesigns",
+					Email: "glendale@scandinaviandesigns.com",
+					Handle: "phoenix",
+					Latitude: 33.639759,
+					Longitude: -112.221718,
+					Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+					Name: "Phoenix",
+					PhoneNumber: "(602) 344-9874",
+					State: "AZ",
+					State_Name: "Arizona",
+					States: "AZ",
+					Status: "Active",
+					Store: "22 - Glendale"
+				}
+			}
+		},
+		LO: {
+			name: "Arizona",
 			stores: {
 				glendale: {
 					AddressOne: "7540 West Bell Road",
@@ -492,81 +700,20 @@
 		}
 	}
 
-	let stateAbbr = []
-	
-	const mobileSelector = document.querySelector('#store-state-selector');
-	const storePageContainer = document.querySelector('#store-page-modal');
-	const storeLocationsContainer = document.querySelector("#store-locations-container");
-	const aboutUs = document.querySelector("#fas-about-us");
-	//const searchLabel = document.querySelector("#fas-loc-search-label");
-	//if(window.innerWidth < 799) searchLabel.innerText = "Select a state or search by zipcode"
-
-	const $popup = document.querySelector('#popup-div');
-	const $popupZip = document.querySelector("#popup-zip-div");
-	const $searchBarWrapper = document.querySelector('#fas-loc-search-button-wrapper');
-	const $searchBarButtonInner = document.querySelector('#fas-loc-search-button-inner');
-	const $searchBarButton = document.querySelector('#fas-loc-search-button');
-	const $searchBar = document.querySelector('#fas-loc-search');
-	
-	const currentDate = new Date();
-	const currentDateName = currentDate.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase();
-	const currentHour = currentDate.getHours();
-	const currentDateFormatted = (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
-	const weekdayMap = new Map();
-	
-	var startOfWeek = new Date();
-	//	Decrement until we reach monday, the start of our week (Sunday is 0 index, but we list Monday first)
-	while(startOfWeek.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase() != "monday") {
-		startOfWeek.setDate(startOfWeek.getDate() - 1);
-	}
-	
-//	Create a hashmap of the week starting on monday that will be used to get regular or holiday hours for the week
-//	Key: {weekdayName, e.g. "monday"}
-//	Value: {Javascript Date}
-	dateIncrementer = new Date(startOfWeek);
-	for(var i = 0; i < 7; i++) {
-		weekdayMap.set(dateIncrementer.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase(), new Date(dateIncrementer));
-		dateIncrementer.setDate(dateIncrementer.getDate() + 1);
-	}
-	
-	var $url = new URL(document.URL);
-	const stateQueryParam = String($url.searchParams.get("state"));
-	const storeQueryParam = String($url.searchParams.get("store"));
-	var shippingNetwork = Cookies.get("cypress_shippingNetwork") != null ? JSON.parse(Cookies.get("cypress_shippingNetwork")) : null;
-	
-	var stores = {};
-	var activeStateContainer;
-	var activeStores = [];
-	var activeState;
-	var transitionLock = false;
-	var firstPass = true;
-	
-	const INSUFFICIENT_ZIP_ERROR = "Please enter 5 characters, leading with zeros if necessary";
-	const MALFORMED_ZIP_ERROR = "Invalid zipcode";
-	
-	const timer = ms => new Promise(res => setTimeout(res, ms));
-	
-	if(shippingNetwork) {
-		$searchBar.value = shippingNetwork.destinationZipcode;
-	}
-	$searchBar.focus();
-	setTimeout(function(){ $searchBar.selectionStart = $searchBar.selectionEnd = 6; }, 0);
-	
-	// fetch("https://sdecommerceapi.azurewebsites.net/getStoreList")
-	// 	.then(response => response.json())
-	// 	.then(storeList => {
-	// 		stores = storeList;
-	//         if(storeList.hasOwnProperty(stateQueryParam) && storeList[stateQueryParam].stores.hasOwnProperty(storeQueryParam)) {
-	//     	//	If the URL already has a valid query, present that store	
-	//     		buildStorePage();
-	// 		}
-	//         buildInfrastructure(stores)
-	// 	});
-
 	buildInfrastructure(data)
+	buildFullStoreList(data)
 
 	function buildFullStoreList(data) {
-		
+		let $div = document.createElement('div')
+
+		console.log(data)
+		for(let state in data) {
+			console.log('state', state)
+			console.log('321321', state["stores"])
+			for(let store in state){
+				console.log('store', store[0])
+			}
+		}
 	}
 	
 //-------------------------------------------------------------------------

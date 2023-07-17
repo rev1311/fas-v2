@@ -552,16 +552,22 @@
 	$searchBar.focus();
 	setTimeout(function(){ $searchBar.selectionStart = $searchBar.selectionEnd = 6; }, 0);
 	
-	fetch("https://sdecommerceapi.azurewebsites.net/getStoreList")
-		.then(response => response.json())
-		.then(storeList => {
-			stores = storeList;
-	        if(storeList.hasOwnProperty(stateQueryParam) && storeList[stateQueryParam].stores.hasOwnProperty(storeQueryParam)) {
-	    	//	If the URL already has a valid query, present that store	
-	    		buildStorePage();
-			}
-	        buildInfrastructure(stores)
-		});
+	// fetch("https://sdecommerceapi.azurewebsites.net/getStoreList")
+	// 	.then(response => response.json())
+	// 	.then(storeList => {
+	// 		stores = storeList;
+	//         if(storeList.hasOwnProperty(stateQueryParam) && storeList[stateQueryParam].stores.hasOwnProperty(storeQueryParam)) {
+	//     	//	If the URL already has a valid query, present that store	
+	//     		buildStorePage();
+	// 		}
+	//         buildInfrastructure(stores)
+	// 	});
+
+	buildInfrastructure(data)
+
+	function buildFullStoreList(data) {
+		
+	}
 	
 //-------------------------------------------------------------------------
 //		FUNCTIONS

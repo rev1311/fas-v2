@@ -31,7 +31,7 @@
 
 
     <div id="fas-grid-container--map">
-    	<svg id="map-svg" 
+    	<svg id="map-svg" style="display: none;" 
 		   xmlns:dc="http://purl.org/dc/elements/1.1/"
 		   xmlns:cc="http://creativecommons.org/ns#"
 		   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -563,7 +563,7 @@
 			}
 		},
 		MI: {
-			name: "Arizona",
+			name: "Michigan",
 			stores: {
 				glendale: {
 					AddressOne: "7540 West Bell Road",
@@ -631,7 +631,7 @@
 			}
 		},
 		LO: {
-			name: "Arizona",
+			name: "Made Up State",
 			stores: {
 				glendale: {
 					AddressOne: "7540 West Bell Road",
@@ -707,10 +707,10 @@
 		let $div = document.createElement('div')
 
 		console.log(data)
-		for(let state in data) {
+		for(const state in data) {
 			console.log('state', state)
 			console.log('321321', state["stores"])
-			for(let store in state){
+			for(const store in state){
 				console.log('store', store[0])
 			}
 		}

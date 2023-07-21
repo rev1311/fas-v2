@@ -1,0 +1,30 @@
+#fas-grid-container--main {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+
+    width: 90vw;
+    padding: 20px;
+    margin: 0 auto;
+
+    background-color: black;
+}
+#fas-grid--header {
+    width: 100%;
+    height: 200px;
+    background-color: aqua;
+    margin-bottom: 20px;
+}
+#fas-grid--subheader {
+    width: 80%;
+    height: 200px;
+    background-color: blueviolet;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+#fas-grid--locations {
+    width: 90%;
+    height: 200px;
+    background-color: aquamarine;
+    margin: 0 auto;
+}

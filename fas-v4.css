@@ -20,7 +20,7 @@ img {
     font-size: xx-large;
 }
 .store-locations-container {
-    display: flex;
+    /* display: flex; */
     color: #333 !important;
     transition: opacity 0.2s ease-in;
     opacity: 1;
@@ -33,7 +33,7 @@ img {
     display: flex;
     flex-wrap: wrap;
     width: 100% !important;
-    opacity: 0;
+    opacity: 1;
     transition: 0.3s ease-in-out;
 }
 .state-header {
@@ -47,7 +47,7 @@ img {
     border-radius: 0.25rem;
     margin: 10px;
     cursor: pointer;
-    opacity: 0;
+    opacity: 1;
     transition: 0.2s ease-in;
     z-index: 1000;
 }
@@ -529,7 +529,7 @@ th {
     margin: 30px auto;
 	transition: 0.3s ease;
 	opacity: 0;
-    text-align: center;
+    text-align: left;
 }
 
 #fas-about-us:first-child {

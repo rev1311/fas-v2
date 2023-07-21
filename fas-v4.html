@@ -38,9 +38,10 @@
             assortment of contemporary, rustic industrial and mid-century modern
             furnishings.</p>
         </div>
+
         <div id="fas-about-us" class="cyp-visible">
             <div id="store-locations-container" class="store-locations-container"></div>
-            <div id="store-page-modal" class="cyp-hidden"></div>
+            <div id="store-page-modal" class="cyp-visible"></div>
         </div>
 
     </div>
@@ -257,14 +258,12 @@
 		}
 	}
 
-    let stateAbbr = []
+	let stateAbbr = []
 	
 	const mobileSelector = document.querySelector('#store-state-selector');
 	const storePageContainer = document.querySelector('#store-page-modal');
 	const storeLocationsContainer = document.querySelector("#store-locations-container");
 	const aboutUs = document.querySelector("#fas-about-us");
-	//const searchLabel = document.querySelector("#fas-loc-search-label");
-	//if(window.innerWidth < 799) searchLabel.innerText = "Select a state or search by zipcode"
 
 	const $popup = document.querySelector('#popup-div');
 	const $popupZip = document.querySelector("#popup-zip-div");
@@ -297,6 +296,7 @@
 	var $url = new URL(document.URL);
 	const stateQueryParam = String($url.searchParams.get("state"));
 	const storeQueryParam = String($url.searchParams.get("store"));
+	// var shippingNetwork = Cookies.get("cypress_shippingNetwork") != null ? JSON.parse(Cookies.get("cypress_shippingNetwork")) : null;
 	
 	var stores = {};
 	var activeStateContainer;
@@ -310,6 +310,9 @@
 	
 	const timer = ms => new Promise(res => setTimeout(res, ms));
 	
+	// if(shippingNetwork) {
+	// 	$searchBar.value = shippingNetwork.destinationZipcode;
+	// }
 	$searchBar.focus();
 	setTimeout(function(){ $searchBar.selectionStart = $searchBar.selectionEnd = 6; }, 0);
 	
@@ -323,21 +326,108 @@
 	// 		}
 	//         buildInfrastructure(stores)
 	// 	});
-
-    buildStateInterface(data)
-
-    function buildStateInterface(data) {
+	
+//-------------------------------------------------------------------------
+//		FUNCTIONS
+//-------------------------------------------------------------------------
+buildInfrastructure(data)
+	function buildInfrastructure (stores) {
+	
+		buildStateInterface(stores);
+	
+	//	** STATE ACTIVATOR **
+	//	---------------------
+	//	Iterate through json response and add 'active' class to states with stores
+	//	--------------------------------------------------------------------------
+	    // const paths = document.getElementsByTagName("path");
+		// for (let pathObject of paths){
+	    // 	if(stores.hasOwnProperty(pathObject.id)){
+	    // 		pathObject.classList.add("active");
+	    // 		setTimeout(() => {
+	    // 			pathObject.classList.add("static");
+		// 		}, "1000")
+	    // 	}
+		// }
+		
+	////////////////////////////////////////////////////////////
+				
+	//	** STATE SELECTOR (DESKTOP) **	
+	//	------------------------------
+	//	Event listener to set state when map is clicked
+	//	-----------------------------------------------
+		// document.querySelector('#fas-grid-container--map').addEventListener('click', e => {
+	    //     e.preventDefault()
+	
+		// 	if(transitionLock){
+	    // 		return;
+	    // 	}
+	
+	    //     if (e.target.tagName == 'path') {
+	    //     	const stateCode = e.target.dataset.id;
+	    //     	if(stores.hasOwnProperty(stateCode) && (activeStateContainer == null || activeStateContainer.getAttribute("state") != stateCode)) {
+	    //     		$url.searchParams.set("state", stateCode);
+	    //     		$url.searchParams.delete("store");
+	    // 			window.history.replaceState({}, "", $url);
+	
+	   	// 			if(activeState != null) {
+	   	// 				activeState.classList.remove("state-selected", "state-selected-animation");
+	   	// 			}
+	   	// 			activeState = e.target;
+	   	// 			activeState.classList.add("state-selected");
+	   	// 			activeState.classList.add("state-selected-transient");
+	   	// 			setTimeout(() => {
+	    // 				activeState.classList.remove("state-selected-transient");
+		// 			}, "100")
+	
+		// 		//	Pass new state into method and reveal stores
+				
+		// 			transitionLock = true;
+		// 			revealStores("desktop", stateCode);
+		// 		}
+	    // 	}
+		// });
+		
+	////////////////////////////////////////////////////////////	
+		
+	//	** STATE SELECTOR (MOBILE) **	
+	//	-----------------------------
+	//	Event listener to set state when map is selected
+	//	------------------------------------------------
+	    // mobileSelector.onchange = function() {
+		//     if(mobileSelector.value == "default"){
+		//        	return;
+		//     }
+		// 	if(mobileSelector.value == "exit"){
+		// 		mobileSelector.value = "default";
+		// 		return;
+		// 	}
+		// 	const stateCode = document.querySelector('#store-state-selector').value;
+		
+		// 	$url.searchParams.set("state", stateCode);
+		// 	$url.searchParams.delete("store");
+		//     window.history.replaceState({}, "", $url);
+		// 	revealStores("mobile", stateCode);
+		// }
+	}
+	
+	////////////////////////////////////////////////////////////	
+	
+//	** STATE CONTAINER AND CARD CONSTRUCTOR **	
+//	----------------------------------------------------------------------
+//	Constructs all active state containers and the store cards within them
+//	----------------------------------------------------------------------
+	function buildStateInterface(data) {
 	// set and build state container
 	    for(const stateCode in data) {
 	        const state = data[stateCode];
 	        const stateDiv = document.createElement('div')
 	        const stateContainerMarkup = `
-	            <div id="state-container-${stateCode}" class="state-container cyp-hidden" state="${stateCode}">
+	            <div id="state-container-${stateCode}" class="state-container" state="${stateCode}">
 	                <h2 class="state-header">${state.name}</h2>
 	                <div class="break"></div>
 	            </div>`
 	            
-	        stateDiv.classList.add('center-hotfix')
+	        // stateDiv.classList.add('center-hotfix')
 	        stateDiv.innerHTML = stateContainerMarkup;
 	        document.querySelector('#store-locations-container').append(stateDiv)
 			
@@ -355,6 +445,9 @@
 	            storeCardProfile.innerHTML = assembleStoreCardHtml(store);
 	            
 	            document.querySelector(`#state-container-${stateCode}`).append(storeCardProfile)
+	
+	         // Add state option to mobile selector
+	            stateAbbr.push(`<option value='${stateCode}'>${state.name}</option>`)
 	        }
 	    }
 	
@@ -362,7 +455,7 @@
 	//	Note that no store cards are built - they will be built and removed upon each search
 		const stateDiv = document.createElement('div')
 	    const stateContainerMarkup = `
-	    	<div id="state-container-search" class="state-container cyp-hidden" state="search">
+	    	<div id="state-container-search" class="state-container" state="search">
 	             <h2 id="search-container-header" class="state-header"></h2>
 	             <div class="break"></div>
 	        </div>`
@@ -370,6 +463,8 @@
 	    stateDiv.classList.add('center-hotfix')
 	    stateDiv.innerHTML = stateContainerMarkup;
 	    document.querySelector('#store-locations-container').append(stateDiv)
+	        
+	    // buildStateAbbr()
 	
 	    if(stateQueryParam && data.hasOwnProperty(stateQueryParam)){
 	    //	If state is present in URL and API response, set it as the current state
@@ -383,41 +478,481 @@
 		}
 	}
 	
-
-    function assembleStoreCardHtml (store, storeDistance) {
+	function buildStateAbbr() {
+	    let uniqueStateAbbr = [...new Set(stateAbbr)].sort();
+		uniqueStateAbbr.map(abb => {
+	    	document.querySelector('#store-state-selector').insertAdjacentHTML( 'beforeend', abb )
+		})
+	}
 	
-    var storeDistanceHtml = "";
-    if(storeDistance != null){
-        storeDistanceHtml = `<p><i>Approx</i>. <b>${storeDistance}</b> miles away</p>`;
-    }
+////////////////////////////////////////////////////////////	
+	
+//	** STORE PAGE CONSTRUCTOR **	
+//	--------------------------------------------------------
+//	Constructs and presents an individual store page
+//	--------------------------------------------------------	
+	function buildStorePage() {
+		const storeHandle = $url.searchParams.get("store");
+		const stateCode = $url.searchParams.get("state");
+		
+		if(stateCode && stores.hasOwnProperty(stateCode) && stores[stateCode].stores.hasOwnProperty(storeHandle)) {
+			const store = stores[stateCode].stores[storeHandle];
 
-    var phone = `<p class="store-phone" phoneLink="tel:${store.PhoneNumber}">${store.PhoneNumber}</p>`;
-      if(store["Closed Reason"] != null) {
-        phone = "<p>" + store["Closed Reason"] + "</p>";
-    }
-    const storeCardMarkup = `
-        <div class="fas-store-card">
-            <div class="fas-store-card-textcontainer">
-                <div class="fas-store-card-title">
-                    <p class="store-title">${store.Name}</p>
-                </div>
-                <div class="fas-store-card-address">
-                    ${storeDistanceHtml}
-                    <p class="store-address">
-                        ${store.AddressOne}
-                    </p>
-                    <p class="store-address2">
-                        ${store.City}, ${store.State} ${store.Zip}
-                    </p>
-                </div>
-                <div class="fas-store-card-phone">
-                    ${phone}
-                </div>
-            </div>
-        </div>`
-    
-        return storeCardMarkup;
-    }
+			storePageContainer.innerHTML = assembleStorePageHtml(store);
+	
+			var currentLayer = aboutUs;
+			if(activeStateContainer && activeStateContainer.classList.contains("cyp-visible")){
+				currentLayer = activeStateContainer;
+			}
+			
+			currentLayer.classList.remove("cyp-visible");
+			
+			setTimeout(() => {
+	    		currentLayer.classList.add("cyp-hidden");
+	  			requestAnimationFrame(()=>{
+					storePageContainer.classList.remove('cyp-hidden')
+					requestAnimationFrame(()=> {
+					    storePageContainer.classList.add('cyp-visible')
+					    if(window.innerWidth < 799) window.scrollTo({top: 390, behavior: 'smooth'});
+					})
+				})
+			}, "300")
+		}
+	}
+	
+////////////////////////////////////////////////////////////	
+	
+//	** STORE CARDS EVENT LISTENER **	
+//	-------------------------------------------------------------------
+//	Sets the URL Query parameter and presents the store page upon click
+//	-------------------------------------------------------------------
+	storeLocationsContainer.addEventListener('click', e => {
+		e.preventDefault()
+		e.stopPropagation();
+		
+		var layer = e.target;
+		
+		if(layer.classList.contains("store-phone")) {
+			window.location.assign(layer.getAttribute("phoneLink"));
+			return;
+		}
+		
+		while(!layer.classList.contains('card-store-profile')){
+			layer = layer.parentNode;
+		}
+		
+		if(layer.classList.contains('card-store-profile')) {
+			$url.searchParams.set("store", layer.getAttribute("handle"));
+			if(layer.getAttribute("search") == "true"){
+				$url.searchParams.set("state", layer.getAttribute("state"));
+
+				if(activeState != null && activeState.id != layer.getAttribute("state")) {
+	   				activeState.classList.remove("state-selected", "state-selected-animation");
+	   			}
+	   			
+	   			if(activeState.id != layer.getAttribute("state")) {
+		   			activeState = document.querySelector("#" + layer.getAttribute("state"));
+		   			activeState.classList.add("state-selected");
+		   			activeState.classList.add("state-selected-transient");
+		   			setTimeout(() => {
+		    			activeState.classList.remove("state-selected-transient");
+					}, "100")
+				}
+			}
+			window.history.replaceState({}, "", $url);
+			buildStorePage();
+		}
+	});
+	
+////////////////////////////////////////////////////////////	
+	
+//	** STORE CARDS BACK BUTTON EVENT LISTENER **	
+//	----------------------------------------------------------------
+//	Removes store from URL parameters and returns back to the states
+//	----------------------------------------------------------------
+	storePageContainer.addEventListener('click', e => {
+		//e.preventDefault()
+		if(e.target.id == "fas-back-btn") {
+			$url.searchParams.delete("store");
+			window.history.replaceState({}, "", $url);
+			revealStores("desktop");
+		}
+	});
+	
+////////////////////////////////////////////////////////////		
+
+//	** SHOW STORES **	
+//	-----------------------------------------------------------------------
+//	Hides whichever panel is currently revealed and unhides the state panel
+//	-----------------------------------------------------------------------
+	function revealStores (type, stateCode) {
+		
+		var currentLayer = aboutUs;
+		if(activeStateContainer && activeStateContainer.classList.contains("cyp-visible")) {
+			currentLayer = activeStateContainer;
+		} else if (storePageContainer.classList.contains("cyp-visible")) {
+			currentLayer = storePageContainer;
+		}
+		currentLayer.classList.remove("cyp-visible");
+		setTimeout(() => {
+			
+			setTimeout(() => {
+				transitionLock = false;
+			}, "50")
+			
+			var newState = false;
+			if(activeStateContainer == null || (stateCode != null && stateCode != activeStateContainer.id)){
+				newState = true;
+			}
+			
+	    	currentLayer.classList.add("cyp-hidden");
+	    	if(stateCode){
+	    		activeStateContainer = document.querySelector(`#state-container-${stateCode}`);
+	    	} 
+	    	
+	    	requestAnimationFrame(()=>{
+				activeStateContainer.classList.remove("cyp-hidden");
+				requestAnimationFrame(()=> {
+					activeStateContainer.classList.add("cyp-visible");
+					if((currentLayer != storePageContainer || newState) || stateCode == "search" || firstPass == true) {
+						setTimeout(() => {
+							for(const activeStore of activeStores) {
+								activeStore.classList.remove("cyp-visible");
+							}
+						
+							activeStores = activeStateContainer.querySelectorAll(".card-store-profile");
+						
+							if(type == "mobile") {
+								for(const activeStore of activeStores) {
+									activeStore.classList.add("cyp-visible")
+								}
+							} else {
+								const columns = Math.floor(storeLocationsContainer.offsetWidth/235);
+								async function load () {
+									for(var i = 0; i < columns && i < activeStores.length; i++) {
+										for(var j = i; j < activeStores.length; j+= columns){
+											activeStores[j].classList.add("cyp-visible");
+										}
+										await timer(50);
+									}
+								}
+								load();
+							}
+						}, "35")
+					}
+					firstPass = false;
+				})
+			})
+		}, "300")
+	}
+	
+	function handlePhone(e) {
+		e.stopImmediatePropagation()
+	}
+	
+////////////////////////////////////////////////////////////
+	
+//	** STORE CARD HTML ASSEMBLER **	
+//	--------------------------------------------------------
+//	Assembles the HTML structure and content of a store card
+//	--------------------------------------------------------	
+	function assembleStoreCardHtml (store, storeDistance) {
+	
+		var storeDistanceHtml = "";
+		if(storeDistance != null){
+			storeDistanceHtml = `<p><i>Approx</i>. <b>${storeDistance}</b> miles away</p>`;
+		}
+	
+		var phone = `<p class="store-phone" phoneLink="tel:${store.PhoneNumber}">${store.PhoneNumber}</p>`;
+  		if(store["Closed Reason"] != null) {
+			phone = "<p>" + store["Closed Reason"] + "</p>";
+		}
+		const storeCardMarkup = `
+			<div class="fas-store-card">
+				<div class="fas-store-card-textcontainer">
+		        	<div class="fas-store-card-title">
+						<p class="store-title">${store.Name}</p>
+					</div>
+					<div class="fas-store-card-address">
+						${storeDistanceHtml}
+						<p class="store-address">
+							${store.AddressOne}
+						</p>
+						<p class="store-address2">
+							${store.City}, ${store.State} ${store.Zip}
+						</p>
+					</div>
+					<div class="fas-store-card-phone">
+						${phone}
+					</div>
+				</div>
+			</div>`
+		
+		return storeCardMarkup;
+	}
+	
+////////////////////////////////////////////////////////////	
+	
+//	** STORE PAGE HTML ASSEMBLER **	
+//	--------------------------------------------------------
+//	Assembles the HTML structure and content of a store page
+//	--------------------------------------------------------	
+	function assembleStorePageHtml (store) {
+	
+	//	If the store is closed for an unusual reason, fade the hours and list that reason
+		var hoursDisabled = "";
+		var storeActive = true;
+        var storeClosedReason = "";
+		if(store["Closed Reason"] != null) {
+			storeActive = false;
+            storeClosedReason = store["Closed Reason"];
+			hoursDisabled = " hours-disabled";
+		}
+	
+		var status = "";
+		var description = "";
+		var schedule = {};
+		var key = "";
+			
+		const holidaySchedules = store["Store Holidays"];
+		const regularSchedules = store["Store Times"];
+		if(holidaySchedules.hasOwnProperty(currentDateFormatted)) {
+			schedule = holidaySchedules[currentDateFormatted];
+		} else {
+			schedule = regularSchedules[currentDateName];
+		}
+		
+		if(schedule.open == true) {
+			if(currentHour >= schedule.openTime && currentHour < schedule.closeTime){
+				status = "Open";
+				description = "closes at " + formatTime(schedule.closeTime);
+			} else {
+				status = "Closed";
+				description = "opens at " + formatTime(schedule.openTime);
+			}
+		} else {
+			status = "Closed";
+			if(schedule.hasOwnProperty("reason")) {
+				description = schedule.reason;
+			}
+		}
+		
+		var storeStatus = "";
+		if(storeActive == false) {
+			storeStatus = `<div class="fas-open-status fas-bold">Closed - ${storeClosedReason}</div>`;
+		} else {
+			storeStatus = `<div class="fas-open-status fas-bold">${status}</div> <div class="fas-open-status">&bull; ${description}</div>`;
+		} 
+	
+		var scheduleHtml = "<table><tr><th colspan='3'><h4>STORE HOURS</h4></th></tr>"
+		for(let weekday of weekdayMap.keys()) {
+			const weekdayDate = weekdayMap.get(weekday); 
+			const weekdayDateFormatted = (weekdayDate.getMonth() + 1) + "/" + weekdayDate.getDate();
+		
+			var openTime = "";
+			var closeTime = "";
+		
+			if(holidaySchedules.hasOwnProperty(weekdayDateFormatted)) {
+				schedule = holidaySchedules[weekdayDateFormatted];
+			} else {
+				schedule = regularSchedules[weekday];
+			}
+			
+			if(schedule.open == true) {
+				openTime = formatTime(schedule.openTime);
+				closeTime = formatTime(schedule.closeTime);
+			} else {
+				openTime = "Closed";
+			}
+			
+			const capitalizedWeekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+			if(weekday == currentDateName && !storeClosedReason){
+				scheduleHtml += `<tr><td class="fas-bold"><b>${capitalizedWeekday}</b></td><td class="fas-bold"><b>${openTime}</b></td><td class="fas-bold"><b>${closeTime}</b></td></tr>`;
+			} else {
+				scheduleHtml += `<tr><td>${capitalizedWeekday}</td><td>${openTime}</td><td>${closeTime}</td></tr>`;
+			}
+		}
+		scheduleHtml += "</table>";
+	
+		var locationHeader = "<h4>LOCATION INFO</h4>";
+		if(window.innerWidth <= 426) {
+			locationHeader = "";
+		}
+
+        var phone = store.PhoneNumber != null ? `<p><a href="tel:${store.PhoneNumber}" class="store-phone">${store.PhoneNumber}</a></p>` : `<p class="store-phone">${store["Closed Reason"]}</p>`
+      
+		const storePageMarkup = `
+			<div id="fas-back-btn">< Back to Stores</div>
+			<div class="sl-grid-title sl-grid-banner sl-halfw sl-centered">
+				<h2>${store.Name}</h2>
+				<div>
+					${storeStatus}
+				</div>
+			</div>
+			<div class="sl-grid-container">
+				<div class="sl-grid-locale sl-grid-item">
+					${locationHeader}
+					<div class="left-text">
+						<p>${store["Brand Name"]}</p>
+						<p>${store.AddressOne}</p>
+						<p>${store.City}, ${store.State} ${store.Zip}</p>
+						<p>United States</p>
+						<br>
+						${phone}
+					</div>
+					<div>
+						<a href="${store["Map Link"]}" target="_blank"><span class="sl-btn">GET DIRECTIONS</span></a>
+					</div>
+				</div>
+				<div class="sl-grid-hours sl-grid-item${hoursDisabled}">
+					${scheduleHtml}
+				</div>
+			</div>
+			<div class="sl-careers sl-fullw sl-centered">
+				<div class="sl-halfw">
+					<h2>SCANDINAVIAN DESIGNS CAREERS</h2>
+					<p>Learn more about our careers!</p>
+					<a href="https://scandinaviandesigns.com/pages/careers-at-scandinavian-designs" target="_blank"><span class="sl-btn"><p>CURRENT OPENINGS</p></span></a>
+				</div>
+			</div>`
+			
+		return storePageMarkup;
+	}
+
+//	** TIME FORMATTER **	
+//	---------------------------------------------------------------------
+//	Takes an hour (e.g. 17) and converts it to a readable-time (5:00PM)  
+//	---------------------------------------------------------------------
+	function formatTime (hour) {
+		return new Date(0, 0, 0, hour, 0, 0, 0).toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+	}
+	
+////////////////////////////////////////////////////////////	
+
+//	** SEARCH BAR FUNCTIONS **	
+//	--------------------------------------------------------
+//	Manages the functionality of the location search bar
+//	--------------------------------------------------------
+//  add 2 event listeners to zip input to validate input and fire on enter key
+	$searchBar.addEventListener('keypress', (e) => {
+	  if(e.key === 'Enter'){
+	    $searchBar.focus();
+	     $searchBarWrapper.click(); 
+	  }
+	})
+	  
+	$searchBar.addEventListener('input', (e) => {
+	    e.preventDefault();
+	    if(e.data != null && (!e.data.match(/^[0-9]$/) || $searchBar.value.length > 5)) $searchBar.value = $searchBar.value.slice(0, -1)
+	})
+	  
+	$searchBarWrapper.addEventListener('mouseover', (e) => {
+		$searchBarButtonInner.classList.add("button-hovered");
+	})
+	
+	$searchBarWrapper.addEventListener('mouseout', (e) => {
+		$searchBarButtonInner.classList.remove("button-hovered");
+	})
+	  
+	// adds event listener to open zip input form
+	$searchBarWrapper.addEventListener('click', (e) => {
+	    e.preventDefault();
+	    
+	    if(transitionLock){
+	    	return;
+	    }
+	    
+	    const searchValue = $searchBar.value != "" ? $searchBar.value : $searchBar.placeholder;
+	    
+		if(searchValue === "" || parseInt(searchValue) < 501 || parseInt(searchValue) > 99950 || searchValue.length < 5) {
+		    if(searchValue.length < 5){
+		        $popup.innerText = INSUFFICIENT_ZIP_ERROR;
+		    } else {
+		        $popup.innerText = MALFORMED_ZIP_ERROR
+		    }
+		  $popupZip.classList.remove("show");
+		  $popup.classList.add("show");
+		  $searchBar.focus();
+		  setTimeout(function(){
+		      $searchBar.focus();
+		  }, 100); 
+		  setTimeout(function(){
+		      $popup.classList.remove("show");
+		  }, 3000); 
+		} else if(searchValue.match(/^[0-9]{5}$/)){
+		
+			const searchPayload = {"query": searchValue}
+		  	$searchBar.placeholder = searchValue;
+		  	$searchBar.value = "";
+			
+			transitionLock = true;
+			
+		    fetch("https://sdecommerceapi.azurewebsites.net/getNearbyStores", {
+		    	method: "POST",
+		    	body: JSON.stringify(searchPayload)})
+				.then(response => response.json())
+				.then(nearbyStores => {
+					
+				//	Remove previous search results
+					const $searchPage = document.querySelector("#state-container-search");
+					const previousItems = $searchPage.querySelectorAll(".fas-item");
+					for(const child of previousItems) {
+						setTimeout(() => {
+							child.remove();
+						}, 299); 
+					}
+
+					if(nearbyStores != null && !nearbyStores.hasOwnProperty("error")) {
+					
+						var storeDistances = new Int16Array(Object.keys(nearbyStores));
+						storeDistances.sort();
+						
+						if(activeState != null) {
+	   						activeState.classList.remove("state-selected", "state-selected-animation");
+	   					}
+	   					activeState = document.querySelector("#" + nearbyStores[storeDistances[0]].state);
+	   					activeState.classList.add("state-selected");
+	   					activeState.classList.add("state-selected-transient");
+	   					setTimeout(() => {
+	    					activeState.classList.remove("state-selected-transient");
+						}, "100")
+						
+						$url.searchParams.set("state", nearbyStores[storeDistances[0]].state);
+						$url.searchParams.delete("store");
+		    			window.history.replaceState({}, "", $url);
+						
+				     // set and build each store location
+				        for(const storeDistance of storeDistances) {
+				        	const storeMap = nearbyStores[storeDistance];
+				        	const store = stores[storeMap.state]["stores"][storeMap.store];
+				            const storeCardProfile = document.createElement('div')
+				            storeCardProfile.classList.add('card-store-profile', 'fas-item')
+				            storeCardProfile.setAttribute("handle", store.Handle);
+				            storeCardProfile.setAttribute("search", "true");
+				            storeCardProfile.setAttribute("state", storeMap.state);	
+				            storeCardProfile.innerHTML = assembleStoreCardHtml(store, storeDistance);
+				            
+				            setTimeout(() => {
+				            	$searchPage.append(storeCardProfile)
+				            }, 299); 
+				        }
+				        setTimeout(() => {
+				            document.querySelector("#search-container-header").innerText = "Stores near " + searchValue;
+				        }, 299); 
+				        
+			        } else {
+			        	setTimeout(() => {
+				        	document.querySelector("#search-container-header").innerText = "No stores near " + searchValue;
+				        	const emptySearchResult = document.createElement('div')
+				        	emptySearchResult.innerHTML = `<div class="fas-empty-search-result fas-item"><p>No stores found near you<p></div>`;
+				        	$searchPage.append(emptySearchResult)
+			        	}, 299);
+			        }
+			        
+			        revealStores("desktop", "search");
+				});
+		}
+	});
 
     </script>
 </body>

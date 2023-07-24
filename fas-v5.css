@@ -1,10 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: blue;
+}
+
+/* ---------------------------------------------grid structure */
+
 #fas-grid--container-main {
     display: grid;
     grid-auto-flow: row;
     grid-template-columns: 1fr;
 
-    width: 90vw;
-    padding: 20px;
+    width: 100vw;
+    min-height: 100vh;
+    padding-bottom: 20px;
     margin: 0 auto;
 
     background-color: black;
@@ -28,3 +40,5 @@
     background-color: aquamarine;
     margin: 0 auto;
 }
+
+/* ---------------------------------------------grid structure */

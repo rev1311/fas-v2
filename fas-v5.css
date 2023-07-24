@@ -1,4 +1,4 @@
-#fas-grid-container--main {
+#fas-grid--container-main {
     display: grid;
     grid-auto-flow: row;
     grid-template-columns: 1fr;

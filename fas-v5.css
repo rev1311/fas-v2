@@ -6,13 +6,14 @@
 body {
     background-color: blue;
 }
+a {
+    text-decoration: none;
+}
 
 .flex-break {
     flex-basis: 100%;
     height: 0;
 }
-
-/* ------------------------------------------------------------------------------grid structure */
 
 /* --------------------------------------------------------------------main grid container */
 #fas-grid--container-main {
@@ -133,5 +134,3 @@ body {
     background-color: aquamarine;
     margin: 0 auto;
 }
-
-/* ------------------------------------------------------------------------------grid structure */

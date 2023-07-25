@@ -21,7 +21,6 @@ body {
     grid-template-columns: 1fr;
     
     width: 100vw;
-    min-height: 100vh;
     padding-bottom: 20px;
     margin: 0 auto;
     
@@ -69,6 +68,46 @@ body {
     background-color: blueviolet;
     margin: 0 auto;
     margin-bottom: 20px;
+}
+#fas-header--searchbar {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: baseline;
+    justify-content: center;
+
+    position: relative;
+    width: auto;
+    height: fit-content;
+
+    margin: 10px;
+    z-index: 99;
+}
+#fas-header--searchbar-input {
+    width: 200px;
+    height: auto;
+    min-height: 35px;
+    vertical-align: middle;
+    font-family: Gilroy,Avenir Next Rounded,Helvetica Neue,Helvetica,Arial;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 16px;
+    background-color: #fff;
+    display: inline;
+    margin: 0 auto; 
+    padding-bottom: 1px;
+
+}
+#fas-header--searchbar-icon {
+    background-image: url('https://cdn.shopify.com/s/files/1/1921/1117/files/search-icon2.png?v=1677698308');
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    outline: 0;
+    cursor: pointer;
 }
 /* --------------------------------------------------------------------data grid container */
 #fas-grid--data {

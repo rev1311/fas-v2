@@ -276,11 +276,19 @@
                 let stateContainer = e.target.parentNode
                 stateContainer.children[2].classList.toggle('fas-collapsed')
                 console.log(stateContainer.children[2].classList)
-                // stateContainer.children[2].classList.toggle('fas-hidden')
             } else {
                 return
             }
         })
+
+        function toggleAccordion(target) {
+            target.classList.toggle('fas-collapsed')
+        }
+
+        if(window.innerWidth < 1025) {
+            document.querySelectorAll('.store-card-drawer').forEach(x => x.classList.toggle('fas-collapsed'))
+            console.log('loop hidden')
+        }
 
         buildStateInterface(fakeData)
     </script>

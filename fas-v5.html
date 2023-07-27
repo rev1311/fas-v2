@@ -257,7 +257,7 @@
 
                 stateDiv.innerHTML = stateContainerMarkup;
                 gridDataContainer.append(stateDiv)
-                
+                console.log('built state box')
                 const storeList = state.stores;
                 var storeHandles = Object.keys(storeList);
                 storeHandles.sort();
@@ -272,6 +272,7 @@
                     storeCardProfile.innerHTML = assembleStoreCardHtml(store);
                     
                     document.querySelector(`#state-container-${stateCode}`).append(storeCardProfile)
+                    console.log('built store card')
                 }
             }
         
@@ -298,6 +299,37 @@
             //         revealStores();
             //     }
             // }
+        }
+
+        function assembleStoreCardHtml (store, storeDistance) {	
+            let storeDistanceHtml = "";
+            const phone = `<p class="store-phone" phoneLink="tel:${store.PhoneNumber}">${store.PhoneNumber}</p>`;
+
+            if(storeDistance != null) storeDistanceHtml = `<p><i>Approx</i>. <b>${storeDistance}</b> miles away</p>`;
+            if(store["Closed Reason"] != null) phone = `<p> ${store["Closed Reason"]} </p>`;
+
+            const storeCardMarkup = `
+                <div class="fas-store-card">
+                    <div class="fas-store-card-textcontainer">
+                        <div class="fas-store-card-title">
+                            <p class="store-title">${store.Name}</p>
+                        </div>
+                        <div class="fas-store-card-address">
+                            ${storeDistanceHtml}
+                            <p class="store-address">
+                                ${store.AddressOne}
+                            </p>
+                            <p class="store-address2">
+                                ${store.City}, ${store.State} ${store.Zip}
+                            </p>
+                        </div>
+                        <div class="fas-store-card-phone">
+                            ${phone}
+                        </div>
+                    </div>
+                </div>`
+            
+            return storeCardMarkup;
         }
 
         buildStateInterface(fakeData)

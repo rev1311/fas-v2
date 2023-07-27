@@ -245,6 +245,62 @@
             }
 	    }
 
+        function buildStateInterface(data) {
+            for(const stateCode in data) {
+                const state = data[stateCode];
+                const stateDiv = document.createElement('div')
+                const stateContainerMarkup = `
+                    <div id="state-container-${stateCode}" class="state-container" state="${stateCode}">
+                        <h2 class="state-header">${state.name}</h2>
+                        <div class="break"></div>
+                    </div>`
+
+                stateDiv.innerHTML = stateContainerMarkup;
+                gridDataContainer.append(stateDiv)
+                
+                const storeList = state.stores;
+                var storeHandles = Object.keys(storeList);
+                storeHandles.sort();
+                
+                for(const storeHandle of storeHandles) {
+                    const store = storeList[storeHandle];
+                    const storeCardProfile = document.createElement('div')
+
+                    storeCardProfile.classList.add('card-store-profile', 'fas-item')
+                    storeCardProfile.setAttribute("handle", store.Handle);
+                        
+                    storeCardProfile.innerHTML = assembleStoreCardHtml(store);
+                    
+                    document.querySelector(`#state-container-${stateCode}`).append(storeCardProfile)
+                }
+            }
+        
+            //	Build the custom search page
+            //	Note that no store cards are built - they will be built and removed upon each search
+            const stateDiv = document.createElement('div')
+            const stateContainerMarkup = `
+                <div id="state-container-search" class="state-container" state="search">
+                    <h2 id="search-container-header" class="state-header"></h2>
+                    <div class="break"></div>
+                </div>`
+            
+            stateDiv.classList.add('center-hotfix')
+            stateDiv.innerHTML = stateContainerMarkup;
+            gridDataContainer.append(stateDiv)
+                     
+            // if(stateQueryParam && data.hasOwnProperty(stateQueryParam)){
+            // //	If state is present in URL and API response, set it as the current state
+            //     activeStateContainer = document.querySelector(`#state-container-${stateQueryParam}`);
+            //     activeState = document.querySelector(`#${stateQueryParam}`);
+            //     activeState.classList.add("state-selected");
+
+            //     if(!(data[stateQueryParam].stores.hasOwnProperty(storeQueryParam))) {
+            //         revealStores();
+            //     }
+            // }
+        }
+
+        buildStateInterface(fakeData)
     </script>
     
 </body>

@@ -147,6 +147,9 @@ a {
     margin: 0 20px 0;
     letter-spacing: 4px !important;
 }
+.state-card-drawer {
+    background-color: chartreuse;
+}
 .card-store-profile {
     background-color: #fff;
     width: 215px;

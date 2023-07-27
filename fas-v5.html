@@ -110,27 +110,6 @@
             MI: {
                 name: "Michigan",
                 stores: {
-                    qwerty: {
-                        AddressOne: "7540 West Bell Road",
-                        Brand: "SD",
-                        Brand_Name: "Scandinavian Designs",
-                        City: "Glendale",
-                        Division: "Dupont",
-                        Division_Name: "74 - DuPont",
-                        Domain: "scandinaviandesigns",
-                        Email: "glendale@scandinaviandesigns.com",
-                        Handle: "glendale",
-                        Latitude: 33.639759,
-                        Longitude: -112.221718,
-                        Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
-                        Name: "Glendale",
-                        PhoneNumber: "(602) 344-9874",
-                        State: "AZ",
-                        State_Name: "Arizona",
-                        States: "AZ",
-                        Status: "Active",
-                        Store: "22 - Glendale"
-                    },
                     dddddd: {
                         AddressOne: "7540 West Bell Road",
                         Brand: "SD",
@@ -178,48 +157,6 @@
             LO: {
                 name: "Made Up State",
                 stores: {
-                    zabba: {
-                        AddressOne: "7540 West Bell Road",
-                        Brand: "SD",
-                        Brand_Name: "Scandinavian Designs",
-                        City: "Glendale",
-                        Division: "Dupont",
-                        Division_Name: "74 - DuPont",
-                        Domain: "scandinaviandesigns",
-                        Email: "glendale@scandinaviandesigns.com",
-                        Handle: "glendale",
-                        Latitude: 33.639759,
-                        Longitude: -112.221718,
-                        Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
-                        Name: "Glendale",
-                        PhoneNumber: "(602) 344-9874",
-                        State: "AZ",
-                        State_Name: "Arizona",
-                        States: "AZ",
-                        Status: "Active",
-                        Store: "22 - Glendale"
-                    },
-                    abba: {
-                        AddressOne: "7540 West Bell Road",
-                        Brand: "SD",
-                        Brand_Name: "Scandinavian Designs",
-                        City: "Mesa",
-                        Division: "Dupont",
-                        Division_Name: "74 - DuPont",
-                        Domain: "scandinaviandesigns",
-                        Email: "glendale@scandinaviandesigns.com",
-                        Handle: "mesa",
-                        Latitude: 33.639759,
-                        Longitude: -112.221718,
-                        Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
-                        Name: "Mesa",
-                        PhoneNumber: "(602) 344-9874",
-                        State: "AZ",
-                        State_Name: "Arizona",
-                        States: "AZ",
-                        Status: "Active",
-                        Store: "22 - Glendale"
-                    },
                     meh: {
                         AddressOne: "7540 West Bell Road",
                         Brand: "SD",
@@ -257,7 +194,7 @@
 
                 stateDiv.innerHTML = stateContainerMarkup;
                 gridDataContainer.append(stateDiv)
-                console.log('built state box')
+                
                 const storeList = state.stores;
                 var storeHandles = Object.keys(storeList);
                 storeHandles.sort();
@@ -272,7 +209,6 @@
                     storeCardProfile.innerHTML = assembleStoreCardHtml(store);
                     
                     document.querySelector(`#state-container-${stateCode}`).append(storeCardProfile)
-                    console.log('built store card')
                 }
             }
         

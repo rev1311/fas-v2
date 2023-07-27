@@ -188,9 +188,11 @@
                 const stateDiv = document.createElement('div')
                 const stateContainerMarkup = `
                     <div id="state-container-${stateCode}" class="state-container" state="${stateCode}">
-                        <h2 class="state-header">${state.name}</h2>
+                        <h2 id="state-header-${stateCode}" class="state-header" state="${stateCode}">${state.name}</h2>
                         <div class="break"></div>
-                        <div id="state-card-drawer-${stateCode}" class="state-card-drawer"></div>
+                        <div class="fas-accordion-wrapper">
+                            <div id="state-card-drawer-${stateCode}" class="state-card-drawer fas-accordion"></div>
+                        </div>
                     </div>`
 
                 stateDiv.innerHTML = stateContainerMarkup;
@@ -205,7 +207,7 @@
                     const storeCardProfile = document.createElement('div')
 
                     storeCardProfile.classList.add('card-store-profile', 'fas-item')
-                    storeCardProfile.setAttribute("handle", store.Handle);
+                    storeCardProfile.setAttribute('handle', store.Handle);
                         
                     storeCardProfile.innerHTML = assembleStoreCardHtml(store);
                     
@@ -268,6 +270,15 @@
             
             return storeCardMarkup;
         }
+
+        gridDataContainer.addEventListener('click', e => {
+            if(e.target.localName == "h2") {
+                let stateContainer = e.target.parentNode
+                stateContainer.children[2].classList.toggle('fas-collapsed')
+            } else {
+                return
+            }
+        })
 
         buildStateInterface(fakeData)
     </script>

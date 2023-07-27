@@ -130,7 +130,30 @@ a {
 /* --------------------------------------------------------------------data grid container */
 #fas-grid--data {
     width: 90%;
-    height: 200px;
+    height: fit-content;
     background-color: aquamarine;
     margin: 0 auto;
+}
+.state-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100% !important;
+    opacity: 1;
+    transition: 0.3s ease-in-out;
+}
+.state-header {
+    color: #333;
+    flex-basis: 100%;
+    margin: 0 20px 0;
+    letter-spacing: 4px !important;
+}
+.card-store-profile {
+    background-color: #fff;
+    width: 215px;
+    border-radius: 0.25rem;
+    margin: 10px;
+    cursor: pointer;
+    opacity: 1;
+    transition: 0.2s ease-in;
+    z-index: 1000;
 }

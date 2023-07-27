@@ -275,6 +275,8 @@
             if(e.target.localName == "h2") {
                 let stateContainer = e.target.parentNode
                 stateContainer.children[2].classList.toggle('fas-collapsed')
+                console.log(stateContainer.children[2].classList)
+                // stateContainer.children[2].classList.toggle('fas-hidden')
             } else {
                 return
             }

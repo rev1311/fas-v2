@@ -182,6 +182,27 @@
             }
 	    }
 
+        const currentDate = new Date();
+        const currentDateName = currentDate.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase();
+        const currentHour = currentDate.getHours();
+        const currentDateFormatted = (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
+        const weekdayMap = new Map();
+        
+        var startOfWeek = new Date();
+        //	Decrement until we reach monday, the start of our week (Sunday is 0 index, but we list Monday first)
+        while(startOfWeek.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase() != "monday") {
+            startOfWeek.setDate(startOfWeek.getDate() - 1);
+        }
+        
+        //	Create a hashmap of the week starting on monday that will be used to get regular or holiday hours for the week
+        //	Key: {weekdayName, e.g. "monday"}
+        //	Value: {Javascript Date}
+        dateIncrementer = new Date(startOfWeek);
+        for(var i = 0; i < 7; i++) {
+            weekdayMap.set(dateIncrementer.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase(), new Date(dateIncrementer));
+            dateIncrementer.setDate(dateIncrementer.getDate() + 1);
+        }
+
         function buildStateInterface(data) {
             for(const stateCode in data) {
                 const state = data[stateCode];

@@ -157,7 +157,7 @@ a {
 .state-header {
     color: #333;
     flex-basis: 100%;
-    margin: 0;
+    margin: 14px 0 0 0;
     padding: 10px;
     letter-spacing: 4px !important;
 }

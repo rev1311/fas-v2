@@ -40,6 +40,8 @@
 
         const searchBarInput = document.getElementById("fas-header--searchbar-input")
         const searchBarSubmitBtn = document.getElementById("fas-header--searchbar-icon")
+        const searchPopup = document.querySelector('#popup-div');
+	    const searchPopupZip = document.querySelector("#popup-zip-div");
         const INSUFFICIENT_ZIP_ERROR = "Please enter 5 characters, leading with zeros if necessary";
 	    const MALFORMED_ZIP_ERROR = "Invalid zipcode";
 
@@ -436,12 +438,12 @@
 
         searchBarInput.focus();
         setTimeout(function(){ searchBarInput.selectionStart = searchBarInput.selectionEnd = 6; }, 0);
-        
+
         //  add 2 event listeners to zip input to validate input and fire on enter key
         searchBarInput.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter'){
-            searchBarInput.focus();
-            searchBarSubmitBtn.click(); 
+            if(e.key === 'Enter'){
+                searchBarInput.focus();
+                searchBarSubmitBtn.click(); 
             }
         })
         
@@ -450,104 +452,104 @@
             if(e.data != null && (!e.data.match(/^[0-9]$/) || searchBarInput.value.length > 5)) searchBarInput.value = searchBarInput.value.slice(0, -1)
         })
 
-        $searchBarWrapper.addEventListener('click', (e) => {
-	    e.preventDefault();
-	    
-	    if(transitionLock){
-	    	return;
-	    }
-	    
-	    const searchValue = $searchBar.value != "" ? $searchBar.value : $searchBar.placeholder;
-	    
-		if(searchValue === "" || parseInt(searchValue) < 501 || parseInt(searchValue) > 99950 || searchValue.length < 5) {
-		    if(searchValue.length < 5){
-		        $popup.innerText = INSUFFICIENT_ZIP_ERROR;
-		    } else {
-		        $popup.innerText = MALFORMED_ZIP_ERROR
-		    }
-		  $popupZip.classList.remove("show");
-		  $popup.classList.add("show");
-		  $searchBar.focus();
-		  setTimeout(function(){
-		      $searchBar.focus();
-		  }, 100); 
-		  setTimeout(function(){
-		      $popup.classList.remove("show");
-		  }, 3000); 
-		} else if(searchValue.match(/^[0-9]{5}$/)){
-		
-			const searchPayload = {"query": searchValue}
-		  	$searchBar.placeholder = searchValue;
-		  	$searchBar.value = "";
-			
-			transitionLock = true;
-			
-		    fetch("https://sdecommerceapi.azurewebsites.net/getNearbyStores", {
-		    	method: "POST",
-		    	body: JSON.stringify(searchPayload)})
-				.then(response => response.json())
-				.then(nearbyStores => {
-					
-				//	Remove previous search results
-					const $searchPage = document.querySelector("#state-container-search");
-					const previousItems = $searchPage.querySelectorAll(".fas-item");
-					for(const child of previousItems) {
-						setTimeout(() => {
-							child.remove();
-						}, 299); 
-					}
+        searchBarSubmitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            if(transitionLock){
+                return;
+            }
+            
+            const searchValue = searchBarInput.value != "" ? searchBarInput.value : searchBarInput.placeholder;
+            
+            if(searchValue === "" || parseInt(searchValue) < 501 || parseInt(searchValue) > 99950 || searchValue.length < 5) {
+                if(searchValue.length < 5){
+                    searchPopup.innerText = INSUFFICIENT_ZIP_ERROR;
+                } else {
+                    searchPopup.innerText = MALFORMED_ZIP_ERROR
+                }
+            searchPopupZip.classList.remove("show");
+            searchPopup.classList.add("show");
+            searchBarInput.focus();
+            setTimeout(function(){
+                searchBarInput.focus();
+            }, 100); 
+            setTimeout(function(){
+                searchPopup.classList.remove("show");
+            }, 3000); 
+            } else if(searchValue.match(/^[0-9]{5}$/)){
+            
+                const searchPayload = {"query": searchValue}
+                searchBarInput.placeholder = searchValue;
+                searchBarInput.value = "";
+                
+                transitionLock = true;
+                
+                fetch("https://sdecommerceapi.azurewebsites.net/getNearbyStores", {
+                    method: "POST",
+                    body: JSON.stringify(searchPayload)})
+                    .then(response => response.json())
+                    .then(nearbyStores => {
+                        
+                    //	Remove previous search results
+                        const $searchPage = document.querySelector("#state-container-search");
+                        const previousItems = $searchPage.querySelectorAll(".fas-item");
+                        for(const child of previousItems) {
+                            setTimeout(() => {
+                                child.remove();
+                            }, 299); 
+                        }
 
-					if(nearbyStores != null && !nearbyStores.hasOwnProperty("error")) {
-					
-						var storeDistances = new Int16Array(Object.keys(nearbyStores));
-						storeDistances.sort();
-						
-						if(activeState != null) {
-	   						activeState.classList.remove("state-selected", "state-selected-animation");
-	   					}
-	   					activeState = document.querySelector("#" + nearbyStores[storeDistances[0]].state);
-	   					activeState.classList.add("state-selected");
-	   					activeState.classList.add("state-selected-transient");
-	   					setTimeout(() => {
-	    					activeState.classList.remove("state-selected-transient");
-						}, "100")
-						
-						$url.searchParams.set("state", nearbyStores[storeDistances[0]].state);
-						$url.searchParams.delete("store");
-		    			window.history.replaceState({}, "", $url);
-						
-				     // set and build each store location
-				        for(const storeDistance of storeDistances) {
-				        	const storeMap = nearbyStores[storeDistance];
-				        	const store = stores[storeMap.state]["stores"][storeMap.store];
-				            const storeCardProfile = document.createElement('div')
-				            storeCardProfile.classList.add('card-store-profile', 'fas-item')
-				            storeCardProfile.setAttribute("handle", store.Handle);
-				            storeCardProfile.setAttribute("search", "true");
-				            storeCardProfile.setAttribute("state", storeMap.state);	
-				            storeCardProfile.innerHTML = assembleStoreCardHtml(store, storeDistance);
-				            
-				            setTimeout(() => {
-				            	$searchPage.append(storeCardProfile)
-				            }, 299); 
-				        }
-				        setTimeout(() => {
-				            document.querySelector("#search-container-header").innerText = "Stores near " + searchValue;
-				        }, 299); 
-				        
-			        } else {
-			        	setTimeout(() => {
-				        	document.querySelector("#search-container-header").innerText = "No stores near " + searchValue;
-				        	const emptySearchResult = document.createElement('div')
-				        	emptySearchResult.innerHTML = `<div class="fas-empty-search-result fas-item"><p>No stores found near you<p></div>`;
-				        	$searchPage.append(emptySearchResult)
-			        	}, 299);
-			        }
-			        
-			        revealStores("desktop", "search");
-				});
-		}
-	});
+                        if(nearbyStores != null && !nearbyStores.hasOwnProperty("error")) {
+                        
+                            var storeDistances = new Int16Array(Object.keys(nearbyStores));
+                            storeDistances.sort();
+                            
+                            if(activeState != null) {
+                                activeState.classList.remove("state-selected", "state-selected-animation");
+                            }
+                            activeState = document.querySelector("#" + nearbyStores[storeDistances[0]].state);
+                            activeState.classList.add("state-selected");
+                            activeState.classList.add("state-selected-transient");
+                            setTimeout(() => {
+                                activeState.classList.remove("state-selected-transient");
+                            }, "100")
+                            
+                            $url.searchParams.set("state", nearbyStores[storeDistances[0]].state);
+                            $url.searchParams.delete("store");
+                            window.history.replaceState({}, "", $url);
+                            
+                        // set and build each store location
+                            for(const storeDistance of storeDistances) {
+                                const storeMap = nearbyStores[storeDistance];
+                                const store = stores[storeMap.state]["stores"][storeMap.store];
+                                const storeCardProfile = document.createElement('div')
+                                storeCardProfile.classList.add('card-store-profile', 'fas-item')
+                                storeCardProfile.setAttribute("handle", store.Handle);
+                                storeCardProfile.setAttribute("search", "true");
+                                storeCardProfile.setAttribute("state", storeMap.state);	
+                                storeCardProfile.innerHTML = assembleStoreCardHtml(store, storeDistance);
+                                
+                                setTimeout(() => {
+                                    $searchPage.append(storeCardProfile)
+                                }, 299); 
+                            }
+                            setTimeout(() => {
+                                document.querySelector("#search-container-header").innerText = "Stores near " + searchValue;
+                            }, 299); 
+                            
+                        } else {
+                            setTimeout(() => {
+                                document.querySelector("#search-container-header").innerText = "No stores near " + searchValue;
+                                const emptySearchResult = document.createElement('div')
+                                emptySearchResult.innerHTML = `<div class="fas-empty-search-result fas-item"><p>No stores found near you<p></div>`;
+                                $searchPage.append(emptySearchResult)
+                            }, 299);
+                        }
+                        
+                        revealStores("desktop", "search");
+                    });
+            }
+	    });
 
         gridDataContainer.addEventListener('click', e => {
             if(e.target.localName == "h2") {

@@ -455,10 +455,6 @@
         searchBarSubmitBtn.addEventListener('click', (e) => {
             e.preventDefault();
             
-            if(transitionLock){
-                return;
-            }
-            
             const searchValue = searchBarInput.value != "" ? searchBarInput.value : searchBarInput.placeholder;
             
             if(searchValue === "" || parseInt(searchValue) < 501 || parseInt(searchValue) > 99950 || searchValue.length < 5) {
@@ -481,8 +477,6 @@
                 const searchPayload = {"query": searchValue}
                 searchBarInput.placeholder = searchValue;
                 searchBarInput.value = "";
-                
-                transitionLock = true;
                 
                 fetch("https://sdecommerceapi.azurewebsites.net/getNearbyStores", {
                     method: "POST",
@@ -566,13 +560,11 @@
         }
 
         if(window.innerWidth < 1025) {
-            console.log(window.innerWidth)
             setTimeout(toggleAccordionOnMobile, 200)
         }
 
         window.addEventListener('resize', e => {
             if(window.innerWidth < 1025) {
-            console.log(window.innerWidth)
             setTimeout(toggleAccordionOnMobile, 200)
         }
         })

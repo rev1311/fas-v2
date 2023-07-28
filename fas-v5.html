@@ -326,6 +326,13 @@
             setTimeout(toggleAccordionOnMobile, 200)
         }
 
+        window.addEventListener('resize', e => {
+            if(window.innerWidth < 1025) {
+            console.log(window.innerWidth)
+            setTimeout(toggleAccordionOnMobile, 200)
+        }
+        })
+
         buildStateInterface(fakeData)
     </script>
     

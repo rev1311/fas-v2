@@ -37,6 +37,7 @@
         const gridHeaderContainer = document.getElementById("fas-grid--header")
         const gridSubHeaderContainer = document.getElementById("fas-grid--subheader")
         const gridDataContainer = document.getElementById("fas-grid--data")
+        const searchBarInput = document.getElementById("fas-header--searchbar-input")
 
         const fakeData = {
             AZ: {
@@ -202,6 +203,20 @@
             weekdayMap.set(dateIncrementer.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase(), new Date(dateIncrementer));
             dateIncrementer.setDate(dateIncrementer.getDate() + 1);
         }
+
+        searchBarInput.focus();
+        setTimeout(function(){ searchBarInput.selectionStart = searchBarInput.selectionEnd = 6; }, 0);
+        
+        // fetch("https://sdecommerceapi.azurewebsites.net/getStoreList")
+        //     .then(response => response.json())
+        //     .then(storeList => {
+        //         stores = storeList;
+        //         if(storeList.hasOwnProperty(stateQueryParam) && storeList[stateQueryParam].stores.hasOwnProperty(storeQueryParam)) {
+        //         //	If the URL already has a valid query, present that store	
+        //             buildStorePage();
+        //         }
+        //         buildInfrastructure(stores)
+        //     });
 
         function buildStateInterface(data) {
             for(const stateCode in data) {

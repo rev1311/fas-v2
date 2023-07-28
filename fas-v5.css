@@ -157,7 +157,8 @@ a {
 .state-header {
     color: #333;
     flex-basis: 100%;
-    margin: 0 20px 0;
+    margin: 0;
+    padding: 10px;
     letter-spacing: 4px !important;
 }
 .state-card-drawer {
@@ -168,6 +169,7 @@ a {
     width: 100% !important;
     transition: all 0.3s ease-in-out;
 }
+/* --------------------------------------------------------------------store cards */
 .store-card-profile {
     background-color: #fff;
     width: 215px;
@@ -178,6 +180,49 @@ a {
     transition: 0.2s ease-in;
     z-index: 1000;
 }
+.fas-store-phone {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 14px;
+}
+.store-phone {
+    pointer-events: auto !important;
+    display: inline-block;
+}
+.store-phone::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    display: block;
+    background-color: white;
+	transition: width 0.3s cubic-bezier(.5, .24, 0, 1);
+}
+.store-phone:hover::after {
+    width: 100%;
+}
+.fas-store-address {
+    min-width: 100%;
+    line-height: 1.5em;
+    margin-bottom: 10px;
+}
+.store-address {
+    min-width: 100%;
+    line-height: 1.5em;
+    margin-bottom: -5px;
+    letter-spacing: 0.05em;
+}
+.store-address2 {
+    min-width: 100%;
+    line-height: 1.5em;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+}
+.fas-store-email {
+    min-width: 100%;
+    pointer-events: auto !important;
+}
+/* --------------------------------------------------------------------accordion controls */
 .fas-accordion-wrapper {
     display: flex;
     overflow: hidden;

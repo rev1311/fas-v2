@@ -307,6 +307,127 @@
             return storeCardMarkup;
         }
 
+        function assembleStorePageHtml (store) {
+            //	If the store is closed for an unusual reason, fade the hours and list that reason
+            var hoursDisabled = "";
+            var storeActive = true;
+            var storeClosedReason = "";
+            if(store["Closed Reason"] != null) {
+                storeActive = false;
+                storeClosedReason = store["Closed Reason"];
+                hoursDisabled = " hours-disabled";
+            }
+        
+            var status = "";
+            var description = "";
+            var schedule = {};
+            var key = "";
+                
+            const holidaySchedules = store["Store Holidays"];
+            const regularSchedules = store["Store Times"];
+            if(holidaySchedules.hasOwnProperty(currentDateFormatted)) {
+                schedule = holidaySchedules[currentDateFormatted];
+            } else {
+                schedule = regularSchedules[currentDateName];
+            }
+            
+            if(schedule.open == true) {
+                if(currentHour >= schedule.openTime && currentHour < schedule.closeTime){
+                    status = "Open";
+                    description = "closes at " + formatTime(schedule.closeTime);
+                } else {
+                    status = "Closed";
+                    description = "opens at " + formatTime(schedule.openTime);
+                }
+            } else {
+                status = "Closed";
+                if(schedule.hasOwnProperty("reason")) {
+                    description = schedule.reason;
+                }
+            }
+            
+            var storeStatus = "";
+            if(storeActive == false) {
+                storeStatus = `<div class="fas-open-status fas-bold">Closed - ${storeClosedReason}</div>`;
+            } else {
+                storeStatus = `<div class="fas-open-status fas-bold">${status}</div> <div class="fas-open-status">&bull; ${description}</div>`;
+            } 
+        
+            var scheduleHtml = "<table><tr><th colspan='3'><h4>STORE HOURS</h4></th></tr>"
+            for(let weekday of weekdayMap.keys()) {
+                const weekdayDate = weekdayMap.get(weekday); 
+                const weekdayDateFormatted = (weekdayDate.getMonth() + 1) + "/" + weekdayDate.getDate();
+            
+                var openTime = "";
+                var closeTime = "";
+            
+                if(holidaySchedules.hasOwnProperty(weekdayDateFormatted)) {
+                    schedule = holidaySchedules[weekdayDateFormatted];
+                } else {
+                    schedule = regularSchedules[weekday];
+                }
+                
+                if(schedule.open == true) {
+                    openTime = formatTime(schedule.openTime);
+                    closeTime = formatTime(schedule.closeTime);
+                } else {
+                    openTime = "Closed";
+                }
+                
+                const capitalizedWeekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+                if(weekday == currentDateName && !storeClosedReason){
+                    scheduleHtml += `<tr><td class="fas-bold"><b>${capitalizedWeekday}</b></td><td class="fas-bold"><b>${openTime}</b></td><td class="fas-bold"><b>${closeTime}</b></td></tr>`;
+                } else {
+                    scheduleHtml += `<tr><td>${capitalizedWeekday}</td><td>${openTime}</td><td>${closeTime}</td></tr>`;
+                }
+            }
+            scheduleHtml += "</table>";
+        
+            var locationHeader = "<h4>LOCATION INFO</h4>";
+            if(window.innerWidth <= 426) {
+                locationHeader = "";
+            }
+
+            var phone = store.PhoneNumber != null ? `<p><a href="tel:${store.PhoneNumber}" class="store-phone">${store.PhoneNumber}</a></p>` : `<p class="store-phone">${store["Closed Reason"]}</p>`
+        
+            const storePageMarkup = `
+                <div id="fas-back-btn">< Back to Stores</div>
+                <div class="sl-grid-title sl-grid-banner sl-halfw sl-centered">
+                    <h2>${store.Name}</h2>
+                    <div>
+                        ${storeStatus}
+                    </div>
+                </div>
+                <div class="sl-grid-container">
+                    <div class="sl-grid-locale sl-grid-item">
+                        ${locationHeader}
+                        <div class="left-text">
+                            <p>${store["Brand Name"]}</p>
+                            <p>${store.AddressOne}</p>
+                            <p>${store.City}, ${store.State} ${store.Zip}</p>
+                            <p>United States</p>
+                            <br>
+                            ${phone}
+                        </div>
+                        <div>
+                            <a href="${store["Map Link"]}" target="_blank"><span class="sl-btn">GET DIRECTIONS</span></a>
+                        </div>
+                    </div>
+                    <div class="sl-grid-hours sl-grid-item${hoursDisabled}">
+                        ${scheduleHtml}
+                    </div>
+                </div>
+                <div class="sl-careers sl-fullw sl-centered">
+                    <div class="sl-halfw">
+                        <h2>SCANDINAVIAN DESIGNS CAREERS</h2>
+                        <p>Learn more about our careers!</p>
+                        <a href="https://scandinaviandesigns.com/pages/careers-at-scandinavian-designs" target="_blank"><span class="sl-btn"><p>CURRENT OPENINGS</p></span></a>
+                    </div>
+                </div>`
+                
+            return storePageMarkup;
+        }
+
         gridDataContainer.addEventListener('click', e => {
             if(e.target.localName == "h2") {
                 let stateContainer = e.target.parentNode.children[2]

@@ -5,8 +5,10 @@
 }
 body {
     background-color: blue;
+    font-size: 14px;
 }
 a {
+    color: #333;
     text-decoration: none;
 }
 
@@ -19,6 +21,9 @@ a {
     opacity: 0;
     max-height: 0;
     transition: all 0.3s ease-in-out;
+}
+.fas-bold {
+    font-weight: 700;
 }
 
 /* --------------------------------------------------------------------main grid container */
@@ -136,7 +141,7 @@ a {
 }
 /* --------------------------------------------------------------------data grid container */
 #fas-grid--data {
-    width: 90%;
+    width: 70%;
     height: fit-content;
     background-color: aquamarine;
     margin: 0 auto;
@@ -163,7 +168,7 @@ a {
     width: 100% !important;
     transition: all 0.3s ease-in-out;
 }
-.card-store-profile {
+.store-card-profile {
     background-color: #fff;
     width: 215px;
     border-radius: 0.25rem;
@@ -201,3 +206,50 @@ a {
     transition: height 0.2s linear;
     max-height: 50px;
   }
+
+ /* --------------------------------------------------------------------------media queries */ 
+
+ @media only screen and (max-width: 1500px) {
+    #fas-header--headline {
+        font-size: 36px; 
+    }
+    #fas-grid--data {
+        width: 80%;
+    }
+    #fas-subheader--logo {
+        width: 40%;
+    }
+ }
+ @media only screen and (max-width: 1024px) {
+    #fas-header--headline {
+        font-size: 36px; 
+    }
+    #fas-grid--data {
+        width: 90%;
+    }
+    #fas-subheader--logo {
+        width: 60%;
+    }
+ }
+ @media only screen and (max-width: 799px) {
+    #fas-header--headline {
+        font-size: 36px; 
+    }
+    #fas-grid--data {
+        width: 100%;
+    }
+    #fas-subheader--logo {
+        width: 70%;
+    }
+ }
+ @media only screen and (max-width: 425px) {
+    #fas-header--headline {
+        font-size: 28px; 
+    }
+    #fas-subheader--logo {
+        width: 90%;
+    }
+    .store-card-profile {
+        width: 44%;
+    }
+ }

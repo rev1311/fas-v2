@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 body {
-    background-color: blue;
     font-size: 14px;
 }
 a {
@@ -143,7 +142,7 @@ a {
 #fas-grid--data {
     width: 70%;
     height: fit-content;
-    background-color: aquamarine;
+    background-color: #fff;
     margin: 0 auto;
 }
 .state-container {
@@ -162,7 +161,7 @@ a {
     letter-spacing: 4px !important;
 }
 .state-card-drawer {
-    background-color: chartreuse;
+    background-color: #fff;
     display: flex;
     flex-wrap: wrap;
     max-height: 500px;
@@ -195,7 +194,7 @@ a {
     width: 0%;
     height: 2px;
     display: block;
-    background-color: white;
+    background-color: #fff;
 	transition: width 0.3s cubic-bezier(.5, .24, 0, 1);
 }
 .store-phone:hover::after {

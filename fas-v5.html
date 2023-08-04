@@ -295,8 +295,7 @@
             if(stateQueryParam && data.hasOwnProperty(stateQueryParam)){
             //	If state is present in URL and API response, set it as the current state
                 activeStateContainer = document.querySelector(`#state-container-${stateQueryParam}`);
-                activeState = document.querySelector(`#${stateQueryParam}`);
-                activeState.classList.add("state-selected");
+                activeStateContainer.click();
 
                 if(!(data[stateQueryParam].stores.hasOwnProperty(storeQueryParam))) {
                     return

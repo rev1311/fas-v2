@@ -187,6 +187,8 @@
         const storelistContainer = document.getElementById("fas-data--storelist")
         const storepageContainer = document.getElementById("fas-data--storepage")
 
+        let stores = {};
+
         const searchBarInput = document.getElementById("fas-header--searchbar-input")
         const searchBarSubmitBtn = document.getElementById("fas-header--searchbar-icon")
         const searchPopup = document.querySelector('#popup-div');
@@ -234,9 +236,13 @@
         //         buildStateInterface(stores)
         //     });
 
+            //remove
             buildStateInterface(fakeData)
 
         function buildStateInterface(data) {
+            //remove
+            stores = data;
+
             for(const stateCode in data) {
                 const state = data[stateCode];
                 const stateDiv = document.createElement('div')

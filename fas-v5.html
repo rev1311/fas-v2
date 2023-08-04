@@ -245,7 +245,7 @@
                         <h2 id="state-header-${stateCode}" class="state-header" state="${stateCode}">${state.name}</h2>
                         <div class="break"></div>
                         <div class="fas-accordion-wrapper">
-                            <div id="state-card-drawer-${stateCode}" class="state-card-drawer fas-accordion"></div>
+                            <div id="state-card-drawer-${stateCode}" data="${stateCode}" class="state-card-drawer fas-accordion"></div>
                         </div>
                     </div>`
 
@@ -300,7 +300,7 @@
 		
 		if(stateCode && stores.hasOwnProperty(stateCode) && stores[stateCode].stores.hasOwnProperty(storeHandle)) {
 			const store = stores[stateCode].stores[storeHandle];
-
+console.log("if works")
 			storepageContainer.innerHTML = assembleStorePageHtml(store);
 			
 			storelistContainer.classList.remove("cyp-visible");
@@ -475,7 +475,7 @@
         storelistContainer.addEventListener('click', e => {
             e.preventDefault()
             e.stopPropagation();
-            console.log(e.target)
+
             var layer = e.target;
             
             if(layer.classList.contains("store-phone")) {
@@ -483,11 +483,12 @@
                 return;
             }
             
-            while(!layer.classList.contains('fas-store-card')){
+            while(!layer.classList.contains('store-card-profile')){
                 layer = layer.parentNode;
             }
             
-            if(layer.classList.contains('fas-store-card')) {
+            if(layer.classList.contains('store-card-profile')) {
+                $url.searchParams.set("state", layer.parentNode.getAttribute("data"));
                 $url.searchParams.set("store", layer.getAttribute("handle"));
                 if(layer.getAttribute("search") == "true"){
                     $url.searchParams.set("state", layer.getAttribute("state"));

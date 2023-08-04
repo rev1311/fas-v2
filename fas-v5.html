@@ -240,11 +240,16 @@
             buildStateInterface(fakeData)
 
         function buildStateInterface(data) {
+            sortedStates = Object.keys(data)
+            .sort()
+            .reduce((acc, key) => ({
+                ...acc, [key]: data[key]
+            }), {})
             //remove
-            stores = data;
+            stores = sortedStates;
 
-            for(const stateCode in data) {
-                const state = data[stateCode];
+            for(const stateCode in sortedStates) {
+                const state = sortedStates[stateCode];
                 const stateDiv = document.createElement('div')
                 const stateContainerMarkup = `
                     <div id="state-container-${stateCode}" class="state-container" state="${stateCode}">
@@ -284,7 +289,6 @@
                     <div class="break"></div>
                 </div>`
             
-            // stateDiv.classList.add('center-hotfix')
             stateDiv.innerHTML = stateContainerMarkup;
             storelistContainer.append(stateDiv)
                      

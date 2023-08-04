@@ -37,6 +37,7 @@
     </div>
 
     <script>
+        const fakeData = {
         const gridHeaderContainer = document.getElementById("fas-grid--header")
         const gridSubHeaderContainer = document.getElementById("fas-grid--subheader")
         const gridDataContainer = document.getElementById("fas-grid--data")
@@ -48,7 +49,6 @@
         const INSUFFICIENT_ZIP_ERROR = "Please enter 5 characters, leading with zeros if necessary";
 	    const MALFORMED_ZIP_ERROR = "Invalid zipcode";
 
-        const fakeData = {
             AZ: {
                 name: "Arizona",
                 stores: {
@@ -192,6 +192,23 @@
             }
 	    }
 
+        const gridHeaderContainer = document.getElementById("fas-grid--header")
+        const gridSubHeaderContainer = document.getElementById("fas-grid--subheader")
+        const gridDataContainer = document.getElementById("fas-grid--data")
+        const storelistContainer = document.getElementById("fas-data--storelist")
+        const storepageContainer = document.getElementById("fas-data--storepage")
+
+        const searchBarInput = document.getElementById("fas-header--searchbar-input")
+        const searchBarSubmitBtn = document.getElementById("fas-header--searchbar-icon")
+        const searchPopup = document.querySelector('#popup-div');
+	    const searchPopupZip = document.querySelector("#popup-zip-div");
+        const INSUFFICIENT_ZIP_ERROR = "Please enter 5 characters, leading with zeros if necessary";
+	    const MALFORMED_ZIP_ERROR = "Invalid zipcode";
+
+      	var $url = new URL(document.URL);
+    	const stateQueryParam = String($url.searchParams.get("state"));
+    	const storeQueryParam = String($url.searchParams.get("store"));
+
         const currentDate = new Date();
         const currentDateName = currentDate.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase();
         const currentHour = currentDate.getHours();
@@ -225,8 +242,10 @@
         //         //	If the URL already has a valid query, present that store	
         //             buildStorePage();
         //         }
-        //         buildInfrastructure(stores)
+        //         buildStateInterface(stores)
         //     });
+
+            buildStateInterface(fakeData)
 
         function buildStateInterface(data) {
             for(const stateCode in data) {
@@ -242,8 +261,8 @@
                     </div>`
 
                 stateDiv.innerHTML = stateContainerMarkup;
-                gridDataContainer.append(stateDiv)
-                
+                storelistContainer.append(stateDiv)
+
                 const storeList = state.stores;
                 var storeHandles = Object.keys(storeList);
                 storeHandles.sort();
@@ -270,25 +289,25 @@
                     <div class="break"></div>
                 </div>`
             
-            stateDiv.classList.add('center-hotfix')
+            // stateDiv.classList.add('center-hotfix')
             stateDiv.innerHTML = stateContainerMarkup;
-            gridDataContainer.append(stateDiv)
+            storelistContainer.append(stateDiv)
                      
-            // if(stateQueryParam && data.hasOwnProperty(stateQueryParam)){
-            // //	If state is present in URL and API response, set it as the current state
-            //     activeStateContainer = document.querySelector(`#state-container-${stateQueryParam}`);
-            //     activeState = document.querySelector(`#${stateQueryParam}`);
-            //     activeState.classList.add("state-selected");
+            if(stateQueryParam && data.hasOwnProperty(stateQueryParam)){
+            //	If state is present in URL and API response, set it as the current state
+                activeStateContainer = document.querySelector(`#state-container-${stateQueryParam}`);
+                activeState = document.querySelector(`#${stateQueryParam}`);
+                activeState.classList.add("state-selected");
 
-            //     if(!(data[stateQueryParam].stores.hasOwnProperty(storeQueryParam))) {
-            //         revealStores();
-            //     }
-            // }
+                if(!(data[stateQueryParam].stores.hasOwnProperty(storeQueryParam))) {
+                    return
+                }
+            }
         }
 
         function assembleStoreCardHtml (store, storeDistance) {	
             let storeDistanceHtml = "";
-            const phone = `<p class="store-phone" phoneLink="tel:${store.PhoneNumber}">${store.PhoneNumber}</p>`;
+            let phone = `<p class="store-phone" phoneLink="tel:${store.PhoneNumber}">${store.PhoneNumber}</p>`;
 
             if(storeDistance != null) storeDistanceHtml = `<p><i>Approx</i>. <b>${storeDistance}</b> miles away</p>`;
             if(store["Closed Reason"] != null) phone = `<p> ${store["Closed Reason"]} </p>`;
@@ -501,16 +520,6 @@
                             var storeDistances = new Int16Array(Object.keys(nearbyStores));
                             storeDistances.sort();
                             
-                            if(activeState != null) {
-                                activeState.classList.remove("state-selected", "state-selected-animation");
-                            }
-                            activeState = document.querySelector("#" + nearbyStores[storeDistances[0]].state);
-                            activeState.classList.add("state-selected");
-                            activeState.classList.add("state-selected-transient");
-                            setTimeout(() => {
-                                activeState.classList.remove("state-selected-transient");
-                            }, "100")
-                            
                             $url.searchParams.set("state", nearbyStores[storeDistances[0]].state);
                             $url.searchParams.delete("store");
                             window.history.replaceState({}, "", $url);
@@ -548,7 +557,7 @@
             }
 	    });
 
-        gridDataContainer.addEventListener('click', e => {
+        storelistContainer.addEventListener('click', e => {
             if(e.target.localName == "h2") {
                 let stateContainer = e.target.parentNode.children[2]
                 stateContainer.classList.toggle('fas-collapsed')
@@ -569,11 +578,6 @@
         window.addEventListener('resize', e => {
             if(window.innerWidth < 1025) {
             setTimeout(toggleAccordionOnMobile, 200)
-        }
+            }
         })
-
-        buildStateInterface(fakeData)
     </script>
-    
-</body>
-</html>

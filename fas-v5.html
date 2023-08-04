@@ -241,10 +241,10 @@
 
         function buildStateInterface(data) {
             sortedStates = Object.keys(data)
-            .sort()
-            .reduce((acc, key) => ({
-                ...acc, [key]: data[key]
-            }), {})
+                .sort()
+                .reduce((acc, key) => ({
+                    ...acc, [key]: data[key]
+                }), {})
             //remove
             stores = sortedStates;
 

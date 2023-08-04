@@ -302,16 +302,11 @@
 			const store = stores[stateCode].stores[storeHandle];
 
 			storepageContainer.innerHTML = assembleStorePageHtml(store);
-	
-			var currentLayer = storepageContainer;
-			if(activeStateContainer && activeStateContainer.classList.contains("cyp-visible")){
-				currentLayer = activeStateContainer;
-			}
 			
-			currentLayer.classList.remove("cyp-visible");
+			storelistContainer.classList.remove("cyp-visible");
 			
 			setTimeout(() => {
-	    		currentLayer.classList.add("cyp-hidden");
+	    		storelistContainer.classList.add("cyp-hidden");
 	  			requestAnimationFrame(()=>{
 					storepageContainer.classList.remove('cyp-hidden')
 					requestAnimationFrame(()=> {

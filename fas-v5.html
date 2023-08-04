@@ -294,7 +294,36 @@
             }
         }
 
-        function assembleStoreCardHtml (store, storeDistance) {	
+        function buildStorePage() {
+		const storeHandle = $url.searchParams.get("store");
+		const stateCode = $url.searchParams.get("state");
+		
+		if(stateCode && stores.hasOwnProperty(stateCode) && stores[stateCode].stores.hasOwnProperty(storeHandle)) {
+			const store = stores[stateCode].stores[storeHandle];
+
+			storepageContainer.innerHTML = assembleStorePageHtml(store);
+	
+			var currentLayer = storepageContainer;
+			if(activeStateContainer && activeStateContainer.classList.contains("cyp-visible")){
+				currentLayer = activeStateContainer;
+			}
+			
+			currentLayer.classList.remove("cyp-visible");
+			
+			setTimeout(() => {
+	    		currentLayer.classList.add("cyp-hidden");
+	  			requestAnimationFrame(()=>{
+					storepageContainer.classList.remove('cyp-hidden')
+					requestAnimationFrame(()=> {
+					    storepageContainer.classList.add('cyp-visible')
+					    if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
+					})
+				})
+			}, "300")
+		}
+	}
+
+        function assembleStoreCardHtml(store, storeDistance) {	
             let storeDistanceHtml = "";
             let phone = `<p class="store-phone" phoneLink="tel:${store.PhoneNumber}">${store.PhoneNumber}</p>`;
 
@@ -325,7 +354,7 @@
             return storeCardMarkup;
         }
 
-        function assembleStorePageHtml (store) {
+        function assembleStorePageHtml(store) {
             //	If the store is closed for an unusual reason, fade the hours and list that reason
             var hoursDisabled = "";
             var storeActive = true;
@@ -444,7 +473,34 @@
                 </div>`
                 
             return storePageMarkup;
+
+            storepageContainer.append(storePageMarkup)
         }
+
+        storelistContainer.addEventListener('click', e => {
+            e.preventDefault()
+            e.stopPropagation();
+            console.log(e.target)
+            var layer = e.target;
+            
+            if(layer.classList.contains("store-phone")) {
+                window.location.assign(layer.getAttribute("phoneLink"));
+                return;
+            }
+            
+            while(!layer.classList.contains('fas-store-card')){
+                layer = layer.parentNode;
+            }
+            
+            if(layer.classList.contains('fas-store-card')) {
+                $url.searchParams.set("store", layer.getAttribute("handle"));
+                if(layer.getAttribute("search") == "true"){
+                    $url.searchParams.set("state", layer.getAttribute("state"));
+                }
+                window.history.replaceState({}, "", $url);
+                buildStorePage();
+            }
+        });
 
 
         searchBarInput.focus();

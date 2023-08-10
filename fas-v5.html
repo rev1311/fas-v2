@@ -676,8 +676,7 @@
 		
 		if(stateCode && stores.hasOwnProperty(stateCode) && stores[stateCode].stores.hasOwnProperty(storeHandle)) {
 			const store = stores[stateCode].stores[storeHandle];
-console.log("if works")
-console.log(stores[stateCode].stores[storeHandle])
+
 			storepageContainer.innerHTML = assembleStorePageHtml(store);
 			
 			storelistContainer.classList.remove("cyp-visible");
@@ -728,7 +727,6 @@ console.log(stores[stateCode].stores[storeHandle])
 
         function assembleStorePageHtml(store) {
             //	If the store is closed for an unusual reason, fade the hours and list that reason
-console.log(store)
             var hoursDisabled = "";
             var storeActive = true;
             var storeClosedReason = "";
@@ -745,8 +743,7 @@ console.log(store)
                 
             const holidaySchedules = store["Store_Holidays"];
             const regularSchedules = store["Store_Times"];
-console.log("holidays",store["Store Holidays"])
-console.log("times",store["Store Times"])
+
             if(holidaySchedules.hasOwnProperty(currentDateFormatted)) {
                 schedule = holidaySchedules[currentDateFormatted];
             } else {
@@ -857,8 +854,18 @@ console.log("times",store["Store Times"])
             e.stopImmediatePropagation()
             if(e.target.id == "fas-back-btn") {
                 $url.searchParams.delete("store");
+                $url.searchParams.delete("state");
                 window.history.replaceState({}, "", $url);
-                buildStateInterface(stores)
+                setTimeout(() => {
+                    storepageContainer.classList.add("cyp-hidden");
+                    requestAnimationFrame(()=>{
+                        storelistContainer.classList.remove('cyp-hidden')
+                        requestAnimationFrame(()=> {
+                            storelistContainer.classList.add('cyp-visible')
+                            if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
+                        })
+                    })
+                }, "300")
             }
 	    });
 

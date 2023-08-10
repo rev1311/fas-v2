@@ -32,6 +32,7 @@
         <div id="fas-grid--data">
           <div id="fas-data--storelist"></div>
           <div id="fas-data--storepage"></div>
+          <div id="fas-data--storesearch"></div>
         </div>
 
     </div>
@@ -551,8 +552,9 @@
         const gridHeaderContainer = document.getElementById("fas-grid--header")
         const gridSubHeaderContainer = document.getElementById("fas-grid--subheader")
         const gridDataContainer = document.getElementById("fas-grid--data")
-        const storelistContainer = document.getElementById("fas-data--storelist")
-        const storepageContainer = document.getElementById("fas-data--storepage")
+        const storeListContainer = document.getElementById("fas-data--storelist")
+        const storePageContainer = document.getElementById("fas-data--storepage")
+        const storeSearchContainer = document.getElementById("fas-data--storesearch")
 
         let stores = {};
 
@@ -628,7 +630,7 @@
                     </div>`
 
                 stateDiv.innerHTML = stateContainerMarkup;
-                storelistContainer.append(stateDiv)
+                storeListContainer.append(stateDiv)
 
                 const storeList = state.stores;
                 var storeHandles = Object.keys(storeList);
@@ -657,7 +659,8 @@
                 </div>`
             
             stateDiv.innerHTML = stateContainerMarkup;
-            storelistContainer.append(stateDiv)
+            storeSearchContainer.append(stateDiv)
+            storeSearchContainer.classList.toggle('cyp-hidden')
                      
             if(stateQueryParam && data.hasOwnProperty(stateQueryParam)){
             //	If state is present in URL and API response, set it as the current state
@@ -677,16 +680,16 @@
 		if(stateCode && stores.hasOwnProperty(stateCode) && stores[stateCode].stores.hasOwnProperty(storeHandle)) {
 			const store = stores[stateCode].stores[storeHandle];
 
-			storepageContainer.innerHTML = assembleStorePageHtml(store);
+			storePageContainer.innerHTML = assembleStorePageHtml(store);
 			
-			storelistContainer.classList.remove("cyp-visible");
+			storeListContainer.classList.remove("cyp-visible");
 			
 			setTimeout(() => {
-	    		storelistContainer.classList.add("cyp-hidden");
+	    		storeListContainer.classList.add("cyp-hidden");
 	  			requestAnimationFrame(()=>{
-					storepageContainer.classList.remove('cyp-hidden')
+					storePageContainer.classList.remove('cyp-hidden')
 					requestAnimationFrame(()=> {
-					    storepageContainer.classList.add('cyp-visible')
+					    storePageContainer.classList.add('cyp-visible')
 					    if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
 					})
 				})
@@ -846,10 +849,10 @@
                 
             return storePageMarkup;
 
-            storepageContainer.append(storePageMarkup)
+            storePageContainer.append(storePageMarkup)
         }
 
-        storepageContainer.addEventListener('click', e => {
+        storePageContainer.addEventListener('click', e => {
             e.preventDefault()
             e.stopImmediatePropagation()
             if(e.target.id == "fas-back-btn") {
@@ -857,11 +860,11 @@
                 $url.searchParams.delete("state");
                 window.history.replaceState({}, "", $url);
                 setTimeout(() => {
-                    storepageContainer.classList.add("cyp-hidden");
+                    storePageContainer.classList.add("cyp-hidden");
                     requestAnimationFrame(()=>{
-                        storelistContainer.classList.remove('cyp-hidden')
+                        storeListContainer.classList.remove('cyp-hidden')
                         requestAnimationFrame(()=> {
-                            storelistContainer.classList.add('cyp-visible')
+                            storeListContainer.classList.add('cyp-visible')
                             if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
                         })
                     })
@@ -869,7 +872,7 @@
             }
 	    });
 
-        storelistContainer.addEventListener('click', e => {
+        storeListContainer.addEventListener('click', e => {
             e.preventDefault()
             e.stopPropagation();
 
@@ -995,7 +998,7 @@ console.log(layer)
             }
 	    });
 
-        storelistContainer.addEventListener('click', e => {
+        storeListContainer.addEventListener('click', e => {
             if(e.target.localName == "h2") {
                 let stateContainer = e.target.parentNode.children[2]
                 stateContainer.classList.toggle('fas-collapsed')

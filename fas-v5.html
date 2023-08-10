@@ -886,7 +886,7 @@
             while(!layer.classList.contains('store-card-profile')){
                 layer = layer.parentNode;
             }
-console.log(layer)           
+
             if(layer.classList.contains('store-card-profile')) {
                 $url.searchParams.set("state", layer.parentNode.getAttribute("data"));
                 $url.searchParams.set("store", layer.getAttribute("handle"));
@@ -993,7 +993,9 @@ console.log(layer)
                             }, 299);
                         }
                         
-                        revealStores("desktop", "search");
+                        storeListContainer.classList.add('cyp-hidden')
+                        storePageContainer.classList.add('cyp-hidden')
+                        storeSearchContainer.classList.toggle('cyp-hidden')
                     });
             }
 	    });

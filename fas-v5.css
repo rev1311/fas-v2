@@ -150,6 +150,7 @@ a {
 }
 #fas-data--storepage {
     background-color: aqua;
+    z-index: 20;
 }
 .state-container {
     display: flex;

@@ -743,8 +743,10 @@ console.log(store)
             var schedule = {};
             var key = "";
                 
-            const holidaySchedules = store["Store Holidays"];
-            const regularSchedules = store["Store Times"];
+            const holidaySchedules = store["Store_Holidays"];
+            const regularSchedules = store["Store_Times"];
+console.log("holidays",store["Store Holidays"])
+console.log("times",store["Store Times"])
             if(holidaySchedules.hasOwnProperty(currentDateFormatted)) {
                 schedule = holidaySchedules[currentDateFormatted];
             } else {
@@ -849,6 +851,16 @@ console.log(store)
 
             storepageContainer.append(storePageMarkup)
         }
+
+        storepageContainer.addEventListener('click', e => {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            if(e.target.id == "fas-back-btn") {
+                $url.searchParams.delete("store");
+                window.history.replaceState({}, "", $url);
+                buildStateInterface(stores)
+            }
+	    });
 
         storelistContainer.addEventListener('click', e => {
             e.preventDefault()

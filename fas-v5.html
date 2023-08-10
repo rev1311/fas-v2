@@ -845,12 +845,7 @@ buildStateInterface(fakeData)
             storePageContainer.append(storePageMarkup)
         }
 
-        storeListContainer.addEventListener('click', e => {
-            e.preventDefault()
-            e.stopPropagation();
-
-            var layer = e.target;
-
+        function handleStoreCardClick(layer) {
             if(layer.classList.contains('state-header') || layer.classList.contains('state-container')) return
             
             if(layer.classList.contains("store-phone")) {
@@ -871,6 +866,30 @@ buildStateInterface(fakeData)
                 window.history.replaceState({}, "", $url);
                 buildStorePage();
             }
+        }
+
+        function handleContainerVisibility(show, ...args) {
+            for(let arg of args) {
+                if(arg != show) arg.classList.remove("cyp-visible");
+            }
+			setTimeout(() => {
+                for(let arg of args) arg.classList.add("cyp-hidden");
+	  			requestAnimationFrame(()=>{
+					show.classList.remove('cyp-hidden')
+					requestAnimationFrame(()=> {
+					    show.classList.add('cyp-visible')
+					    if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
+					})
+				})
+			}, "300")
+        }
+
+        storeListContainer.addEventListener('click', e => {
+            e.preventDefault()
+
+            var layer = e.target;
+
+            handleStoreCardClick(layer)
         });
 
         storePageContainer.addEventListener('click', e => {
@@ -894,7 +913,14 @@ buildStateInterface(fakeData)
                 handleContainerVisibility(storeListContainer, storePageContainer, storeSearchContainer)
             }
 	    });
+        
+        storeSearchContainer.addEventListener('click', e => {
+            e.preventDefault()
 
+            var layer = e.target;
+
+            handleStoreCardClick(layer)
+        });
 
         searchBarInput.focus();
         setTimeout(function(){ searchBarInput.selectionStart = searchBarInput.selectionEnd = 6; }, 0);
@@ -993,22 +1019,6 @@ buildStateInterface(fakeData)
                     });
             }
 	    });
-        
-        function handleContainerVisibility(show, ...args) {
-            for(let arg of args) {
-                if(arg != show) arg.classList.remove("cyp-visible");
-            }
-			setTimeout(() => {
-                for(let arg of args) arg.classList.add("cyp-hidden");
-	  			requestAnimationFrame(()=>{
-					show.classList.remove('cyp-hidden')
-					requestAnimationFrame(()=> {
-					    show.classList.add('cyp-visible')
-					    if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
-					})
-				})
-			}, "300")
-        }
 
         storeListContainer.addEventListener('click', e => {
             if(e.target.localName == "h2") {

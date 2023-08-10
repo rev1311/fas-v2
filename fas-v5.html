@@ -605,8 +605,8 @@
         //         buildStateInterface(stores)
         //     });
 
-            //remove
-            buildStateInterface(fakeData)
+//remove
+buildStateInterface(fakeData)
 
         function buildStateInterface(data) {
             sortedStates = Object.keys(data)
@@ -614,7 +614,7 @@
                 .reduce((acc, key) => ({
                     ...acc, [key]: data[key]
                 }), {})
-            //remove
+            
             stores = sortedStates;
 
             for(const stateCode in sortedStates) {
@@ -648,19 +648,8 @@
                     document.querySelector(`#state-card-drawer-${stateCode}`).append(storeCardProfile)
                 }
             }
-        
-            //	Build the custom search page
-            //	Note that no store cards are built - they will be built and removed upon each search
-            const stateDiv = document.createElement('div')
-            const stateContainerMarkup = `
-                <div id="state-container-search" class="state-container" state="search">
-                    <h2 id="search-container-header" class="state-header"></h2>
-                    <div class="break"></div>
-                </div>`
-            
-            stateDiv.innerHTML = stateContainerMarkup;
-            storeSearchContainer.append(stateDiv)
-            storeSearchContainer.classList.toggle('cyp-hidden')
+
+            buildSearchPage()
                      
             if(stateQueryParam && data.hasOwnProperty(stateQueryParam)){
             //	If state is present in URL and API response, set it as the current state
@@ -673,29 +662,33 @@
             }
         }
 
-        function buildStorePage() {
-		const storeHandle = $url.searchParams.get("store");
-		const stateCode = $url.searchParams.get("state");
-		
-		if(stateCode && stores.hasOwnProperty(stateCode) && stores[stateCode].stores.hasOwnProperty(storeHandle)) {
-			const store = stores[stateCode].stores[storeHandle];
+        function buildSearchPage() {
+            //	Build the custom search page
+            //	Note that no store cards are built - they will be built and removed upon each search
+            const stateDiv = document.createElement('div')
+            const stateContainerMarkup = `
+                <div id="state-container-search" class="state-container" state="search">
+                    <div id="fas-back-btn">< Back to Stores</div>
+                    <h2 id="search-container-header" class="state-header"></h2>
+                    <div class="break"></div>
+                </div>`
+            
+            stateDiv.innerHTML = stateContainerMarkup;
+            storeSearchContainer.append(stateDiv)
+        }
 
-			storePageContainer.innerHTML = assembleStorePageHtml(store);
-			
-			storeListContainer.classList.remove("cyp-visible");
-			
-			setTimeout(() => {
-	    		storeListContainer.classList.add("cyp-hidden");
-	  			requestAnimationFrame(()=>{
-					storePageContainer.classList.remove('cyp-hidden')
-					requestAnimationFrame(()=> {
-					    storePageContainer.classList.add('cyp-visible')
-					    if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
-					})
-				})
-			}, "300")
-		}
-	}
+        function buildStorePage() {
+            const storeHandle = $url.searchParams.get("store");
+            const stateCode = $url.searchParams.get("state");
+            
+            if(stateCode && stores.hasOwnProperty(stateCode) && stores[stateCode].stores.hasOwnProperty(storeHandle)) {
+                const store = stores[stateCode].stores[storeHandle];
+
+                storePageContainer.innerHTML = assembleStorePageHtml(store);
+                
+                handleContainerVisibility(storePageContainer, storeListContainer, storeSearchContainer)
+            }
+        }
 
         function assembleStoreCardHtml(store, storeDistance) {	
             let storeDistanceHtml = "";
@@ -852,31 +845,13 @@
             storePageContainer.append(storePageMarkup)
         }
 
-        storePageContainer.addEventListener('click', e => {
-            e.preventDefault()
-            e.stopImmediatePropagation()
-            if(e.target.id == "fas-back-btn") {
-                $url.searchParams.delete("store");
-                $url.searchParams.delete("state");
-                window.history.replaceState({}, "", $url);
-                setTimeout(() => {
-                    storePageContainer.classList.add("cyp-hidden");
-                    requestAnimationFrame(()=>{
-                        storeListContainer.classList.remove('cyp-hidden')
-                        requestAnimationFrame(()=> {
-                            storeListContainer.classList.add('cyp-visible')
-                            if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
-                        })
-                    })
-                }, "300")
-            }
-	    });
-
         storeListContainer.addEventListener('click', e => {
             e.preventDefault()
             e.stopPropagation();
 
             var layer = e.target;
+
+            if(layer.classList.contains('state-header') || layer.classList.contains('state-container')) return
             
             if(layer.classList.contains("store-phone")) {
                 window.location.assign(layer.getAttribute("phoneLink"));
@@ -897,6 +872,28 @@
                 buildStorePage();
             }
         });
+
+        storePageContainer.addEventListener('click', e => {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            if(e.target.id == "fas-back-btn") {
+                $url.searchParams.delete("store");
+                $url.searchParams.delete("state");
+                window.history.replaceState({}, "", $url);
+                handleContainerVisibility(storeListContainer, storePageContainer, storeSearchContainer)
+            }
+	    });
+
+        storeSearchContainer.addEventListener('click', e => {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+            if(e.target.id == "fas-back-btn") {
+                $url.searchParams.delete("store");
+                $url.searchParams.delete("state");
+                window.history.replaceState({}, "", $url);
+                handleContainerVisibility(storeListContainer, storePageContainer, storeSearchContainer)
+            }
+	    });
 
 
         searchBarInput.focus();
@@ -926,15 +923,15 @@
                 } else {
                     searchPopup.innerText = MALFORMED_ZIP_ERROR
                 }
-            searchPopupZip.classList.remove("show");
-            searchPopup.classList.add("show");
-            searchBarInput.focus();
-            setTimeout(function(){
+                searchPopupZip.classList.remove("show");
+                searchPopup.classList.add("show");
                 searchBarInput.focus();
-            }, 100); 
-            setTimeout(function(){
-                searchPopup.classList.remove("show");
-            }, 3000); 
+                setTimeout(function(){
+                    searchBarInput.focus();
+                }, 100); 
+                setTimeout(function(){
+                    searchPopup.classList.remove("show");
+                }, 3000); 
             } else if(searchValue.match(/^[0-9]{5}$/)){
             
                 const searchPayload = {"query": searchValue}
@@ -991,20 +988,32 @@
                                 emptySearchResult.innerHTML = `<div class="fas-empty-search-result fas-item"><p>No stores found near you<p></div>`;
                                 $searchPage.append(emptySearchResult)
                             }, 299);
-                        }
-                        
-                        storeListContainer.classList.add('cyp-hidden')
-                        storePageContainer.classList.add('cyp-hidden')
-                        storeSearchContainer.classList.toggle('cyp-hidden')
+                        } 
+                        handleContainerVisibility(storeSearchContainer, storeListContainer, storePageContainer)
                     });
             }
 	    });
+        
+        function handleContainerVisibility(show, ...args) {
+            for(let arg of args) {
+                if(arg != show) arg.classList.remove("cyp-visible");
+            }
+			setTimeout(() => {
+                for(let arg of args) arg.classList.add("cyp-hidden");
+	  			requestAnimationFrame(()=>{
+					show.classList.remove('cyp-hidden')
+					requestAnimationFrame(()=> {
+					    show.classList.add('cyp-visible')
+					    if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
+					})
+				})
+			}, "300")
+        }
 
         storeListContainer.addEventListener('click', e => {
             if(e.target.localName == "h2") {
                 let stateContainer = e.target.parentNode.children[2]
                 stateContainer.classList.toggle('fas-collapsed')
-                console.log(stateContainer.classList)
             } else {
                 return
             }
@@ -1015,12 +1024,12 @@
         }
 
         if(window.innerWidth < 1025) {
-            setTimeout(toggleAccordionOnMobile, 200)
+            setTimeout(toggleAccordionOnMobile, 100)
         }
 
         window.addEventListener('resize', e => {
             if(window.innerWidth < 1025) {
-            setTimeout(toggleAccordionOnMobile, 200)
+            setTimeout(toggleAccordionOnMobile, 100)
             }
         })
     </script>

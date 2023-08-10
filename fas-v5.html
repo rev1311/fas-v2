@@ -8,1038 +8,1038 @@
 </head>
 <body>
 
-    <div id="fas-grid--container-main">
+<div id="fas-grid--container-main">
 
-        <div id="fas-grid--header">
-            <a href="https://www.{{shop.domain}}/pages/stores"><p id="fas-header--headline">Find Your Store</p></a>
-            <div class="flex-break"></div>
-            <div id="fas-header--searchbar">
-                <label for=""></label>
-                <input id="fas-header--searchbar-input" type="text" placeholder="Search By Zip">
-                <div id="fas-header--searchbar-icon"></div>
-            </div>
-
-        </div>
-
-        <div id="fas-grid--subheader">
-            <div id="fas-subheader--logo"><img src="https://cdn.shopify.com/s/files/1/1921/1117/files/SD_DA_Logo_With_Signet_No_Furn_300_px.svg?v=1675730107" /></div>
-            <!-- <p id="fas-subheader--text">With a focus on quality furniture crafted for every budget,
-                sister-brands Scandinavian Designs & Dania Furniture offer the same
-                assortment of contemporary, rustic industrial and mid-century modern
-                furnishings.</p> -->
-        </div>
-
-        <div id="fas-grid--data">
-          <div id="fas-data--storelist"></div>
-          <div id="fas-data--storepage"></div>
-          <div id="fas-data--storesearch"></div>
+    <div id="fas-grid--header">
+        <a href="https://www.{{shop.domain}}/pages/stores"><p id="fas-header--headline">Find Your Store</p></a>
+        <div class="flex-break"></div>
+        <div id="fas-header--searchbar">
+            <label for=""></label>
+            <input id="fas-header--searchbar-input" type="text" placeholder="Search By Zip">
+            <div id="fas-header--searchbar-icon"></div>
         </div>
 
     </div>
 
-    <script>
-        const fakeData = {
-            AZ: {
-                name: "Arizona",
-                stores: {
-                    glendale: {
-                        AddressOne: "7540 West Bell Road",
-                        Brand: "SD",
-                        Brand_Name: "Scandinavian Designs",
-                        City: "Glendale",
-                        Division: "Dupont",
-                        Division_Name: "74 - DuPont",
-                        Domain: "scandinaviandesigns",
-                        Email: "glendale@scandinaviandesigns.com",
-                        Handle: "glendale",
-                        Latitude: 33.639759,
-                        Longitude: -112.221718,
-                        Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
-                        Name: "Glendale",
-                        PhoneNumber: "(602) 344-9874",
-                        State: "AZ",
-                        State_Name: "Arizona",
-                        States: "AZ",
-                        Status: "Active",
-                        Store: "22 - Glendale",
-                        Store_Times: {
-                            "friday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "saturday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":18
-                            },
-                            "sunday":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":18
-                            },
-                            "monday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "tuesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "wednesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "thursday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            }
-                        },
-                        Store_Holidays: {
-                            "4/9":{
-                                "open":false,
-                                "reason":"Easter"
-                            },
-                            "7/4":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":17
-                            },   "11/23":{
-                                "open":false,
-                                "reason":"Thanksgiving"
-                            },
-                            "12/24":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":17
-                            },
-                            "12/25":{
-                                "open":false,
-                                "reason":"Christmas"
-                            }
-                        },
-                        Zip: 85206
-                    },
-                    mesa: {
-                        AddressOne: "7540 West Bell Road",
-                        Brand: "SD",
-                        Brand_Name: "Scandinavian Designs",
-                        City: "Mesa",
-                        Division: "Dupont",
-                        Division_Name: "74 - DuPont",
-                        Domain: "scandinaviandesigns",
-                        Email: "glendale@scandinaviandesigns.com",
-                        Handle: "mesa",
-                        Latitude: 33.639759,
-                        Longitude: -112.221718,
-                        Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
-                        Name: "Mesa",
-                        PhoneNumber: "(602) 344-9874",
-                        State: "AZ",
-                        State_Name: "Arizona",
-                        States: "AZ",
-                        Status: "Active",
-                        Store: "22 - Glendale",
-                        Store_Times: {
-                            "friday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "saturday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":18
-                            },
-                            "sunday":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":18
-                            },
-                            "monday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "tuesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "wednesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "thursday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            }
-                        },
-                        Store_Holidays: {
-                            "4/9":{
-                                "open":false,
-                                "reason":"Easter"
-                            },
-                            "7/4":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":17
-                            },   "11/23":{
-                                "open":false,
-                                "reason":"Thanksgiving"
-                            },
-                            "12/24":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":17
-                            },
-                            "12/25":{
-                                "open":false,
-                                "reason":"Christmas"
-                            }
-                        },
-                        Zip: 85206
-                    },
-                    phoenix: {
-                        AddressOne: "7540 West Bell Road",
-                        Brand: "SD",
-                        Brand_Name: "Scandinavian Designs",
-                        City: "Phoenix",
-                        Division: "Dupont",
-                        Division_Name: "74 - DuPont",
-                        Domain: "scandinaviandesigns",
-                        Email: "glendale@scandinaviandesigns.com",
-                        Handle: "phoenix",
-                        Latitude: 33.639759,
-                        Longitude: -112.221718,
-                        Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
-                        Name: "Phoenix",
-                        PhoneNumber: "(602) 344-9874",
-                        State: "AZ",
-                        State_Name: "Arizona",
-                        States: "AZ",
-                        Status: "Active",
-                        Store: "22 - Glendale",
-                        Store_Times: {
-                            "friday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "saturday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":18
-                            },
-                            "sunday":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":18
-                            },
-                            "monday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "tuesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "wednesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "thursday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            }
-                        },
-                        Store_Holidays: {
-                            "4/9":{
-                                "open":false,
-                                "reason":"Easter"
-                            },
-                            "7/4":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":17
-                            },   "11/23":{
-                                "open":false,
-                                "reason":"Thanksgiving"
-                            },
-                            "12/24":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":17
-                            },
-                            "12/25":{
-                                "open":false,
-                                "reason":"Christmas"
-                            }
-                        },
-                        Zip: 85206
-                    }
-                }
-            },
-            MI: {
-                name: "Michigan",
-                stores: {
-                    dddddd: {
-                        AddressOne: "7540 West Bell Road",
-                        Brand: "SD",
-                        Brand_Name: "Scandinavian Designs",
-                        City: "Mesa",
-                        Division: "Dupont",
-                        Division_Name: "74 - DuPont",
-                        Domain: "scandinaviandesigns",
-                        Email: "glendale@scandinaviandesigns.com",
-                        Handle: "dddddd",
-                        Latitude: 33.639759,
-                        Longitude: -112.221718,
-                        Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
-                        Name: "dddddd",
-                        PhoneNumber: "(602) 344-9874",
-                        State: "AZ",
-                        State_Name: "Arizona",
-                        States: "AZ",
-                        Status: "Active",
-                        Store: "22 - Glendale",
-                        Store_Times: {
-                            "friday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "saturday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":18
-                            },
-                            "sunday":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":18
-                            },
-                            "monday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "tuesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "wednesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "thursday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            }
-                        },
-                        Store_Holidays: {
-                            "4/9":{
-                                "open":false,
-                                "reason":"Easter"
-                            },
-                            "7/4":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":17
-                            },   "11/23":{
-                                "open":false,
-                                "reason":"Thanksgiving"
-                            },
-                            "12/24":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":17
-                            },
-                            "12/25":{
-                                "open":false,
-                                "reason":"Christmas"
-                            }
-                        },
-                        Zip: 85206
-                    },
-                    asdf: {
-                        AddressOne: "7540 West Bell Road",
-                        Brand: "SD",
-                        Brand_Name: "Scandinavian Designs",
-                        City: "Phoenix",
-                        Division: "Dupont",
-                        Division_Name: "74 - DuPont",
-                        Domain: "scandinaviandesigns",
-                        Email: "glendale@scandinaviandesigns.com",
-                        Handle: "asdf",
-                        Latitude: 33.639759,
-                        Longitude: -112.221718,
-                        Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
-                        Name: "asdf",
-                        PhoneNumber: "(602) 344-9874",
-                        State: "AZ",
-                        State_Name: "Arizona",
-                        States: "AZ",
-                        Status: "Active",
-                        Store: "22 - Glendale",
-                        Store_Times: {
-                            "friday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "saturday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":18
-                            },
-                            "sunday":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":18
-                            },
-                            "monday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "tuesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "wednesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "thursday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            }
-                        },
-                        Store_Holidays: {
-                            "4/9":{
-                                "open":false,
-                                "reason":"Easter"
-                            },
-                            "7/4":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":17
-                            },   "11/23":{
-                                "open":false,
-                                "reason":"Thanksgiving"
-                            },
-                            "12/24":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":17
-                            },
-                            "12/25":{
-                                "open":false,
-                                "reason":"Christmas"
-                            }
-                        },
-                        Zip: 85206
-                    }
-                }
-            },
-            LO: {
-                name: "Made Up State",
-                stores: {
-                    meh: {
-                        AddressOne: "7540 West Bell Road",
-                        Brand: "SD",
-                        Brand_Name: "Scandinavian Designs",
-                        City: "Phoenix",
-                        Division: "Dupont",
-                        Division_Name: "74 - DuPont",
-                        Domain: "scandinaviandesigns",
-                        Email: "glendale@scandinaviandesigns.com",
-                        Handle: "meh",
-                        Latitude: 33.639759,
-                        Longitude: -112.221718,
-                        Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
-                        Name: "meh",
-                        PhoneNumber: "(602) 344-9874",
-                        State: "AZ",
-                        State_Name: "Arizona",
-                        States: "AZ",
-                        Status: "Active",
-                        Store: "22 - Glendale",
-                        Store_Times: {
-                            "friday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "saturday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":18
-                            },
-                            "sunday":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":18
-                            },
-                            "monday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "tuesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "wednesday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            },
-                            "thursday":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":19
-                            }
-                        },
-                        Store_Holidays: {
-                            "4/9":{
-                                "open":false,
-                                "reason":"Easter"
-                            },
-                            "7/4":{
-                                "open":true,
-                                "openTime":10,
-                                "closeTime":17
-                            },   "11/23":{
-                                "open":false,
-                                "reason":"Thanksgiving"
-                            },
-                            "12/24":{
-                                "open":true,
-                                "openTime":11,
-                                "closeTime":17
-                            },
-                            "12/25":{
-                                "open":false,
-                                "reason":"Christmas"
-                            }
-                        },
-                        Zip: 85206
+    <div id="fas-grid--subheader">
+        <div id="fas-subheader--logo"><img src="https://cdn.shopify.com/s/files/1/1921/1117/files/SD_DA_Logo_With_Signet_No_Furn_300_px.svg?v=1675730107" /></div>
+        <!-- <p id="fas-subheader--text">With a focus on quality furniture crafted for every budget,
+            sister-brands Scandinavian Designs & Dania Furniture offer the same
+            assortment of contemporary, rustic industrial and mid-century modern
+            furnishings.</p> -->
+    </div>
 
-                    }
+    <div id="fas-grid--data">
+        <div id="fas-data--storelist"></div>
+        <div id="fas-data--storepage"></div>
+        <div id="fas-data--storesearch"></div>
+    </div>
+
+</div>
+
+<script>
+    const fakeData = {
+        AZ: {
+            name: "Arizona",
+            stores: {
+                glendale: {
+                    AddressOne: "7540 West Bell Road",
+                    Brand: "SD",
+                    Brand_Name: "Scandinavian Designs",
+                    City: "Glendale",
+                    Division: "Dupont",
+                    Division_Name: "74 - DuPont",
+                    Domain: "scandinaviandesigns",
+                    Email: "glendale@scandinaviandesigns.com",
+                    Handle: "glendale",
+                    Latitude: 33.639759,
+                    Longitude: -112.221718,
+                    Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+                    Name: "Glendale",
+                    PhoneNumber: "(602) 344-9874",
+                    State: "AZ",
+                    State_Name: "Arizona",
+                    States: "AZ",
+                    Status: "Active",
+                    Store: "22 - Glendale",
+                    Store_Times: {
+                        "friday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "saturday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":18
+                        },
+                        "sunday":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":18
+                        },
+                        "monday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "tuesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "wednesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "thursday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        }
+                    },
+                    Store_Holidays: {
+                        "4/9":{
+                            "open":false,
+                            "reason":"Easter"
+                        },
+                        "7/4":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":17
+                        },   "11/23":{
+                            "open":false,
+                            "reason":"Thanksgiving"
+                        },
+                        "12/24":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":17
+                        },
+                        "12/25":{
+                            "open":false,
+                            "reason":"Christmas"
+                        }
+                    },
+                    Zip: 85206
+                },
+                mesa: {
+                    AddressOne: "7540 West Bell Road",
+                    Brand: "SD",
+                    Brand_Name: "Scandinavian Designs",
+                    City: "Mesa",
+                    Division: "Dupont",
+                    Division_Name: "74 - DuPont",
+                    Domain: "scandinaviandesigns",
+                    Email: "glendale@scandinaviandesigns.com",
+                    Handle: "mesa",
+                    Latitude: 33.639759,
+                    Longitude: -112.221718,
+                    Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+                    Name: "Mesa",
+                    PhoneNumber: "(602) 344-9874",
+                    State: "AZ",
+                    State_Name: "Arizona",
+                    States: "AZ",
+                    Status: "Active",
+                    Store: "22 - Glendale",
+                    Store_Times: {
+                        "friday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "saturday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":18
+                        },
+                        "sunday":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":18
+                        },
+                        "monday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "tuesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "wednesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "thursday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        }
+                    },
+                    Store_Holidays: {
+                        "4/9":{
+                            "open":false,
+                            "reason":"Easter"
+                        },
+                        "7/4":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":17
+                        },   "11/23":{
+                            "open":false,
+                            "reason":"Thanksgiving"
+                        },
+                        "12/24":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":17
+                        },
+                        "12/25":{
+                            "open":false,
+                            "reason":"Christmas"
+                        }
+                    },
+                    Zip: 85206
+                },
+                phoenix: {
+                    AddressOne: "7540 West Bell Road",
+                    Brand: "SD",
+                    Brand_Name: "Scandinavian Designs",
+                    City: "Phoenix",
+                    Division: "Dupont",
+                    Division_Name: "74 - DuPont",
+                    Domain: "scandinaviandesigns",
+                    Email: "glendale@scandinaviandesigns.com",
+                    Handle: "phoenix",
+                    Latitude: 33.639759,
+                    Longitude: -112.221718,
+                    Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+                    Name: "Phoenix",
+                    PhoneNumber: "(602) 344-9874",
+                    State: "AZ",
+                    State_Name: "Arizona",
+                    States: "AZ",
+                    Status: "Active",
+                    Store: "22 - Glendale",
+                    Store_Times: {
+                        "friday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "saturday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":18
+                        },
+                        "sunday":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":18
+                        },
+                        "monday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "tuesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "wednesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "thursday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        }
+                    },
+                    Store_Holidays: {
+                        "4/9":{
+                            "open":false,
+                            "reason":"Easter"
+                        },
+                        "7/4":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":17
+                        },   "11/23":{
+                            "open":false,
+                            "reason":"Thanksgiving"
+                        },
+                        "12/24":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":17
+                        },
+                        "12/25":{
+                            "open":false,
+                            "reason":"Christmas"
+                        }
+                    },
+                    Zip: 85206
                 }
             }
-	    }
+        },
+        MI: {
+            name: "Michigan",
+            stores: {
+                dddddd: {
+                    AddressOne: "7540 West Bell Road",
+                    Brand: "SD",
+                    Brand_Name: "Scandinavian Designs",
+                    City: "Mesa",
+                    Division: "Dupont",
+                    Division_Name: "74 - DuPont",
+                    Domain: "scandinaviandesigns",
+                    Email: "glendale@scandinaviandesigns.com",
+                    Handle: "dddddd",
+                    Latitude: 33.639759,
+                    Longitude: -112.221718,
+                    Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+                    Name: "dddddd",
+                    PhoneNumber: "(602) 344-9874",
+                    State: "AZ",
+                    State_Name: "Arizona",
+                    States: "AZ",
+                    Status: "Active",
+                    Store: "22 - Glendale",
+                    Store_Times: {
+                        "friday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "saturday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":18
+                        },
+                        "sunday":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":18
+                        },
+                        "monday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "tuesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "wednesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "thursday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        }
+                    },
+                    Store_Holidays: {
+                        "4/9":{
+                            "open":false,
+                            "reason":"Easter"
+                        },
+                        "7/4":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":17
+                        },   "11/23":{
+                            "open":false,
+                            "reason":"Thanksgiving"
+                        },
+                        "12/24":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":17
+                        },
+                        "12/25":{
+                            "open":false,
+                            "reason":"Christmas"
+                        }
+                    },
+                    Zip: 85206
+                },
+                asdf: {
+                    AddressOne: "7540 West Bell Road",
+                    Brand: "SD",
+                    Brand_Name: "Scandinavian Designs",
+                    City: "Phoenix",
+                    Division: "Dupont",
+                    Division_Name: "74 - DuPont",
+                    Domain: "scandinaviandesigns",
+                    Email: "glendale@scandinaviandesigns.com",
+                    Handle: "asdf",
+                    Latitude: 33.639759,
+                    Longitude: -112.221718,
+                    Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+                    Name: "asdf",
+                    PhoneNumber: "(602) 344-9874",
+                    State: "AZ",
+                    State_Name: "Arizona",
+                    States: "AZ",
+                    Status: "Active",
+                    Store: "22 - Glendale",
+                    Store_Times: {
+                        "friday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "saturday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":18
+                        },
+                        "sunday":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":18
+                        },
+                        "monday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "tuesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "wednesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "thursday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        }
+                    },
+                    Store_Holidays: {
+                        "4/9":{
+                            "open":false,
+                            "reason":"Easter"
+                        },
+                        "7/4":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":17
+                        },   "11/23":{
+                            "open":false,
+                            "reason":"Thanksgiving"
+                        },
+                        "12/24":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":17
+                        },
+                        "12/25":{
+                            "open":false,
+                            "reason":"Christmas"
+                        }
+                    },
+                    Zip: 85206
+                }
+            }
+        },
+        LO: {
+            name: "Made Up State",
+            stores: {
+                meh: {
+                    AddressOne: "7540 West Bell Road",
+                    Brand: "SD",
+                    Brand_Name: "Scandinavian Designs",
+                    City: "Phoenix",
+                    Division: "Dupont",
+                    Division_Name: "74 - DuPont",
+                    Domain: "scandinaviandesigns",
+                    Email: "glendale@scandinaviandesigns.com",
+                    Handle: "meh",
+                    Latitude: 33.639759,
+                    Longitude: -112.221718,
+                    Map_Link: "https://www.google.com/maps/place/Scandinavian+Designs/@33.6393987,-112.2230755,17z/data=!4m13!1m7!3m6!1s0x872b683a0b186e1d:0x700a652c06fe876b!2s7540+W+Bell+Rd,+Glendale,+AZ+85308!3b1!8m2!3d33.6399093!4d-112.2217291!3m4!1s0x872b69137d47083b:0x3935b3f77abe708c!8m2!3d33.6397094!4d-112.2217178",
+                    Name: "meh",
+                    PhoneNumber: "(602) 344-9874",
+                    State: "AZ",
+                    State_Name: "Arizona",
+                    States: "AZ",
+                    Status: "Active",
+                    Store: "22 - Glendale",
+                    Store_Times: {
+                        "friday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "saturday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":18
+                        },
+                        "sunday":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":18
+                        },
+                        "monday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "tuesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "wednesday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        },
+                        "thursday":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":19
+                        }
+                    },
+                    Store_Holidays: {
+                        "4/9":{
+                            "open":false,
+                            "reason":"Easter"
+                        },
+                        "7/4":{
+                            "open":true,
+                            "openTime":10,
+                            "closeTime":17
+                        },   "11/23":{
+                            "open":false,
+                            "reason":"Thanksgiving"
+                        },
+                        "12/24":{
+                            "open":true,
+                            "openTime":11,
+                            "closeTime":17
+                        },
+                        "12/25":{
+                            "open":false,
+                            "reason":"Christmas"
+                        }
+                    },
+                    Zip: 85206
 
-        const gridHeaderContainer = document.getElementById("fas-grid--header")
-        const gridSubHeaderContainer = document.getElementById("fas-grid--subheader")
-        const gridDataContainer = document.getElementById("fas-grid--data")
-        const storeListContainer = document.getElementById("fas-data--storelist")
-        const storePageContainer = document.getElementById("fas-data--storepage")
-        const storeSearchContainer = document.getElementById("fas-data--storesearch")
-
-        let stores = {};
-
-        const searchBarInput = document.getElementById("fas-header--searchbar-input")
-        const searchBarSubmitBtn = document.getElementById("fas-header--searchbar-icon")
-        const searchPopup = document.querySelector('#popup-div');
-	    const searchPopupZip = document.querySelector("#popup-zip-div");
-        const INSUFFICIENT_ZIP_ERROR = "Please enter 5 characters, leading with zeros if necessary";
-	    const MALFORMED_ZIP_ERROR = "Invalid zipcode";
-
-      	var $url = new URL(document.URL);
-    	const stateQueryParam = String($url.searchParams.get("state"));
-    	const storeQueryParam = String($url.searchParams.get("store"));
-
-        const currentDate = new Date();
-        const currentDateName = currentDate.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase();
-        const currentHour = currentDate.getHours();
-        const currentDateFormatted = (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
-        const weekdayMap = new Map();
-        
-        var startOfWeek = new Date();
-        //	Decrement until we reach monday, the start of our week (Sunday is 0 index, but we list Monday first)
-        while(startOfWeek.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase() != "monday") {
-            startOfWeek.setDate(startOfWeek.getDate() - 1);
+                }
+            }
         }
-        
-        //	Create a hashmap of the week starting on monday that will be used to get regular or holiday hours for the week
-        //	Key: {weekdayName, e.g. "monday"}
-        //	Value: {Javascript Date}
-        dateIncrementer = new Date(startOfWeek);
-        for(var i = 0; i < 7; i++) {
-            weekdayMap.set(dateIncrementer.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase(), new Date(dateIncrementer));
-            dateIncrementer.setDate(dateIncrementer.getDate() + 1);
-        }
-        // Takes an hour (e.g. 17) and converts it to a readable-time (5:00PM)
-        function formatTime (hour) {
-		return new Date(0, 0, 0, hour, 0, 0, 0).toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-	    }
-        
-        // fetch("https://sdecommerceapi.azurewebsites.net/getStoreList")
-        //     .then(response => response.json())
-        //     .then(storeList => {
-        //         stores = storeList;
-        //         if(storeList.hasOwnProperty(stateQueryParam) && storeList[stateQueryParam].stores.hasOwnProperty(storeQueryParam)) {
-        //         //	If the URL already has a valid query, present that store	
-        //             buildStorePage();
-        //         }
-        //         buildStateInterface(stores)
-        //     });
+    }
+
+    const gridHeaderContainer = document.getElementById("fas-grid--header")
+    const gridSubHeaderContainer = document.getElementById("fas-grid--subheader")
+    const gridDataContainer = document.getElementById("fas-grid--data")
+    const storeListContainer = document.getElementById("fas-data--storelist")
+    const storePageContainer = document.getElementById("fas-data--storepage")
+    const storeSearchContainer = document.getElementById("fas-data--storesearch")
+
+    let stores = {};
+
+    const searchBarInput = document.getElementById("fas-header--searchbar-input")
+    const searchBarSubmitBtn = document.getElementById("fas-header--searchbar-icon")
+    const searchPopup = document.querySelector('#popup-div');
+    const searchPopupZip = document.querySelector("#popup-zip-div");
+    const INSUFFICIENT_ZIP_ERROR = "Please enter 5 characters, leading with zeros if necessary";
+    const MALFORMED_ZIP_ERROR = "Invalid zipcode";
+
+    var $url = new URL(document.URL);
+    const stateQueryParam = String($url.searchParams.get("state"));
+    const storeQueryParam = String($url.searchParams.get("store"));
+
+    const currentDate = new Date();
+    const currentDateName = currentDate.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase();
+    const currentHour = currentDate.getHours();
+    const currentDateFormatted = (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
+    const weekdayMap = new Map();
+    
+    var startOfWeek = new Date();
+    //	Decrement until we reach monday, the start of our week (Sunday is 0 index, but we list Monday first)
+    while(startOfWeek.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase() != "monday") {
+        startOfWeek.setDate(startOfWeek.getDate() - 1);
+    }
+    
+    //	Create a hashmap of the week starting on monday that will be used to get regular or holiday hours for the week
+    //	Key: {weekdayName, e.g. "monday"}
+    //	Value: {Javascript Date}
+    dateIncrementer = new Date(startOfWeek);
+    for(var i = 0; i < 7; i++) {
+        weekdayMap.set(dateIncrementer.toLocaleDateString('en-US',{weekday: 'long'}).toLowerCase(), new Date(dateIncrementer));
+        dateIncrementer.setDate(dateIncrementer.getDate() + 1);
+    }
+    // Takes an hour (e.g. 17) and converts it to a readable-time (5:00PM)
+    function formatTime (hour) {
+    return new Date(0, 0, 0, hour, 0, 0, 0).toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    }
+    
+    // fetch("https://sdecommerceapi.azurewebsites.net/getStoreList")
+    //     .then(response => response.json())
+    //     .then(storeList => {
+    //         stores = storeList;
+    //         if(storeList.hasOwnProperty(stateQueryParam) && storeList[stateQueryParam].stores.hasOwnProperty(storeQueryParam)) {
+    //         //	If the URL already has a valid query, present that store	
+    //             buildStorePage();
+    //         }
+    //         buildStateInterface(stores)
+    //     });
 
 //remove
 buildStateInterface(fakeData)
 
-        function buildStateInterface(data) {
-            sortedStates = Object.keys(data)
-                .sort()
-                .reduce((acc, key) => ({
-                    ...acc, [key]: data[key]
-                }), {})
-            
-            stores = sortedStates;
+    function buildStateInterface(data) {
+        sortedStates = Object.keys(data)
+            .sort()
+            .reduce((acc, key) => ({
+                ...acc, [key]: data[key]
+            }), {})
+        
+        stores = sortedStates;
 
-            for(const stateCode in sortedStates) {
-                const state = sortedStates[stateCode];
-                const stateDiv = document.createElement('div')
-                const stateContainerMarkup = `
-                    <div id="state-container-${stateCode}" class="state-container" state="${stateCode}">
-                        <h2 id="state-header-${stateCode}" class="state-header" state="${stateCode}">${state.name}</h2>
-                        <div class="break"></div>
-                        <div class="fas-accordion-wrapper">
-                            <div id="state-card-drawer-${stateCode}" data="${stateCode}" class="state-card-drawer fas-accordion"></div>
-                        </div>
-                    </div>`
-
-                stateDiv.innerHTML = stateContainerMarkup;
-                storeListContainer.append(stateDiv)
-
-                const storeList = state.stores;
-                var storeHandles = Object.keys(storeList);
-                storeHandles.sort();
-                
-                for(const storeHandle of storeHandles) {
-                    const store = storeList[storeHandle];
-                    const storeCardProfile = document.createElement('div')
-
-                    storeCardProfile.classList.add('store-card-profile', 'fas-item')
-                    storeCardProfile.setAttribute('handle', store.Handle);
-                        
-                    storeCardProfile.innerHTML = assembleStoreCardHtml(store);
-                    
-                    document.querySelector(`#state-card-drawer-${stateCode}`).append(storeCardProfile)
-                }
-            }
-
-            buildSearchPage()
-                     
-            if(stateQueryParam && data.hasOwnProperty(stateQueryParam)){
-            //	If state is present in URL and API response, set it as the current state
-                activeStateContainer = document.querySelector(`#state-container-${stateQueryParam}`);
-                activeStateContainer.click();
-
-                if(!(data[stateQueryParam].stores.hasOwnProperty(storeQueryParam))) {
-                    return
-                }
-            }
-        }
-
-        function buildSearchPage() {
-            //	Build the custom search page
-            //	Note that no store cards are built - they will be built and removed upon each search
+        for(const stateCode in sortedStates) {
+            const state = sortedStates[stateCode];
             const stateDiv = document.createElement('div')
             const stateContainerMarkup = `
-                <div id="state-container-search" class="state-container" state="search">
-                    <div id="fas-back-btn">< Back to Stores</div>
-                    <h2 id="search-container-header" class="state-header"></h2>
+                <div id="state-container-${stateCode}" class="state-container" state="${stateCode}">
+                    <h2 id="state-header-${stateCode}" class="state-header" state="${stateCode}">${state.name}</h2>
                     <div class="break"></div>
-                </div>`
-            
-            stateDiv.innerHTML = stateContainerMarkup;
-            storeSearchContainer.append(stateDiv)
-        }
-
-        function buildStorePage() {
-            const storeHandle = $url.searchParams.get("store");
-            const stateCode = $url.searchParams.get("state");
-            
-            if(stateCode && stores.hasOwnProperty(stateCode) && stores[stateCode].stores.hasOwnProperty(storeHandle)) {
-                const store = stores[stateCode].stores[storeHandle];
-
-                storePageContainer.innerHTML = assembleStorePageHtml(store);
-                
-                handleContainerVisibility(storePageContainer, storeListContainer, storeSearchContainer)
-            }
-        }
-
-        function assembleStoreCardHtml(store, storeDistance) {	
-            let storeDistanceHtml = "";
-            let phone = `<p class="store-phone" phoneLink="tel:${store.PhoneNumber}">${store.PhoneNumber}</p>`;
-
-            if(storeDistance != null) storeDistanceHtml = `<p><i>Approx</i>. <b>${storeDistance}</b> miles away</p>`;
-            if(store["Closed Reason"] != null) phone = `<p> ${store["Closed Reason"]} </p>`;
-
-            const storeCardMarkup = `
-                <div class="fas-store-card">
-                    <div class="fas-store-card-textcontainer">
-                        <div class="fas-store-card-title">
-                            <p class="store-title">${store.Name}</p>
-                        </div>
-                        <div class="fas-store-card-address">
-                            ${storeDistanceHtml}
-                            <p class="store-address">
-                                ${store.AddressOne}
-                            </p>
-                            <p class="store-address2">
-                                ${store.City}, ${store.State} ${store.Zip}
-                            </p>
-                        </div>
-                        <div class="fas-store-card-phone">
-                            ${phone}
-                        </div>
+                    <div class="fas-accordion-wrapper">
+                        <div id="state-card-drawer-${stateCode}" data="${stateCode}" class="state-card-drawer fas-accordion"></div>
                     </div>
                 </div>`
+
+            stateDiv.innerHTML = stateContainerMarkup;
+            storeListContainer.append(stateDiv)
+
+            const storeList = state.stores;
+            var storeHandles = Object.keys(storeList);
+            storeHandles.sort();
             
-            return storeCardMarkup;
+            for(const storeHandle of storeHandles) {
+                const store = storeList[storeHandle];
+                const storeCardProfile = document.createElement('div')
+
+                storeCardProfile.classList.add('store-card-profile', 'fas-item')
+                storeCardProfile.setAttribute('handle', store.Handle);
+                    
+                storeCardProfile.innerHTML = assembleStoreCardHtml(store);
+                
+                document.querySelector(`#state-card-drawer-${stateCode}`).append(storeCardProfile)
+            }
         }
 
-        function assembleStorePageHtml(store) {
-            //	If the store is closed for an unusual reason, fade the hours and list that reason
-            var hoursDisabled = "";
-            var storeActive = true;
-            var storeClosedReason = "";
-            if(store["Closed Reason"] != null) {
-                storeActive = false;
-                storeClosedReason = store["Closed Reason"];
-                hoursDisabled = " hours-disabled";
-            }
-        
-            var status = "";
-            var description = "";
-            var schedule = {};
-            var key = "";
-                
-            const holidaySchedules = store["Store_Holidays"];
-            const regularSchedules = store["Store_Times"];
+        buildSearchPage()
+                    
+        if(stateQueryParam && data.hasOwnProperty(stateQueryParam)){
+        //	If state is present in URL and API response, set it as the current state
+            activeStateContainer = document.querySelector(`#state-container-${stateQueryParam}`);
+            activeStateContainer.click();
 
-            if(holidaySchedules.hasOwnProperty(currentDateFormatted)) {
-                schedule = holidaySchedules[currentDateFormatted];
+            if(!(data[stateQueryParam].stores.hasOwnProperty(storeQueryParam))) {
+                return
+            }
+        }
+    }
+
+    function buildSearchPage() {
+        //	Build the custom search page
+        //	Note that no store cards are built - they will be built and removed upon each search
+        const stateDiv = document.createElement('div')
+        const stateContainerMarkup = `
+            <div id="state-container-search" class="state-container" state="search">
+                <div id="fas-back-btn">< Back to Stores</div>
+                <h2 id="search-container-header" class="state-header"></h2>
+                <div class="break"></div>
+            </div>`
+        
+        stateDiv.innerHTML = stateContainerMarkup;
+        storeSearchContainer.append(stateDiv)
+    }
+
+    function buildStorePage() {
+        const storeHandle = $url.searchParams.get("store");
+        const stateCode = $url.searchParams.get("state");
+        
+        if(stateCode && stores.hasOwnProperty(stateCode) && stores[stateCode].stores.hasOwnProperty(storeHandle)) {
+            const store = stores[stateCode].stores[storeHandle];
+
+            storePageContainer.innerHTML = assembleStorePageHtml(store);
+            
+            handleContainerVisibility(storePageContainer, storeListContainer, storeSearchContainer)
+        }
+    }
+
+    function assembleStoreCardHtml(store, storeDistance) {	
+        let storeDistanceHtml = "";
+        let phone = `<p class="store-phone" phoneLink="tel:${store.PhoneNumber}">${store.PhoneNumber}</p>`;
+
+        if(storeDistance != null) storeDistanceHtml = `<p><i>Approx</i>. <b>${storeDistance}</b> miles away</p>`;
+        if(store["Closed Reason"] != null) phone = `<p> ${store["Closed Reason"]} </p>`;
+
+        const storeCardMarkup = `
+            <div class="fas-store-card">
+                <div class="fas-store-card-textcontainer">
+                    <div class="fas-store-card-title">
+                        <p class="store-title">${store.Name}</p>
+                    </div>
+                    <div class="fas-store-card-address">
+                        ${storeDistanceHtml}
+                        <p class="store-address">
+                            ${store.AddressOne}
+                        </p>
+                        <p class="store-address2">
+                            ${store.City}, ${store.State} ${store.Zip}
+                        </p>
+                    </div>
+                    <div class="fas-store-card-phone">
+                        ${phone}
+                    </div>
+                </div>
+            </div>`
+        
+        return storeCardMarkup;
+    }
+
+    function assembleStorePageHtml(store) {
+        //	If the store is closed for an unusual reason, fade the hours and list that reason
+        var hoursDisabled = "";
+        var storeActive = true;
+        var storeClosedReason = "";
+        if(store["Closed Reason"] != null) {
+            storeActive = false;
+            storeClosedReason = store["Closed Reason"];
+            hoursDisabled = " hours-disabled";
+        }
+    
+        var status = "";
+        var description = "";
+        var schedule = {};
+        var key = "";
+            
+        const holidaySchedules = store["Store_Holidays"];
+        const regularSchedules = store["Store_Times"];
+
+        if(holidaySchedules.hasOwnProperty(currentDateFormatted)) {
+            schedule = holidaySchedules[currentDateFormatted];
+        } else {
+            schedule = regularSchedules[currentDateName];
+        }
+        
+        if(schedule.open == true) {
+            if(currentHour >= schedule.openTime && currentHour < schedule.closeTime){
+                status = "Open";
+                description = "closes at " + formatTime(schedule.closeTime);
             } else {
-                schedule = regularSchedules[currentDateName];
+                status = "Closed";
+                description = "opens at " + formatTime(schedule.openTime);
+            }
+        } else {
+            status = "Closed";
+            if(schedule.hasOwnProperty("reason")) {
+                description = schedule.reason;
+            }
+        }
+        
+        var storeStatus = "";
+        if(storeActive == false) {
+            storeStatus = `<div class="fas-open-status fas-bold">Closed - ${storeClosedReason}</div>`;
+        } else {
+            storeStatus = `<div class="fas-open-status fas-bold">${status}</div> <div class="fas-open-status">&bull; ${description}</div>`;
+        } 
+    
+        var scheduleHtml = "<table><tr><th colspan='3'><h4>STORE HOURS</h4></th></tr>"
+        for(let weekday of weekdayMap.keys()) {
+            const weekdayDate = weekdayMap.get(weekday); 
+            const weekdayDateFormatted = (weekdayDate.getMonth() + 1) + "/" + weekdayDate.getDate();
+        
+            var openTime = "";
+            var closeTime = "";
+        
+            if(holidaySchedules.hasOwnProperty(weekdayDateFormatted)) {
+                schedule = holidaySchedules[weekdayDateFormatted];
+            } else {
+                schedule = regularSchedules[weekday];
             }
             
             if(schedule.open == true) {
-                if(currentHour >= schedule.openTime && currentHour < schedule.closeTime){
-                    status = "Open";
-                    description = "closes at " + formatTime(schedule.closeTime);
-                } else {
-                    status = "Closed";
-                    description = "opens at " + formatTime(schedule.openTime);
-                }
+                openTime = formatTime(schedule.openTime);
+                closeTime = formatTime(schedule.closeTime);
             } else {
-                status = "Closed";
-                if(schedule.hasOwnProperty("reason")) {
-                    description = schedule.reason;
-                }
+                openTime = "Closed";
             }
             
-            var storeStatus = "";
-            if(storeActive == false) {
-                storeStatus = `<div class="fas-open-status fas-bold">Closed - ${storeClosedReason}</div>`;
+            const capitalizedWeekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+            if(weekday == currentDateName && !storeClosedReason){
+                scheduleHtml += `<tr><td class="fas-bold"><b>${capitalizedWeekday}</b></td><td class="fas-bold"><b>${openTime}</b></td><td class="fas-bold"><b>${closeTime}</b></td></tr>`;
             } else {
-                storeStatus = `<div class="fas-open-status fas-bold">${status}</div> <div class="fas-open-status">&bull; ${description}</div>`;
-            } 
-        
-            var scheduleHtml = "<table><tr><th colspan='3'><h4>STORE HOURS</h4></th></tr>"
-            for(let weekday of weekdayMap.keys()) {
-                const weekdayDate = weekdayMap.get(weekday); 
-                const weekdayDateFormatted = (weekdayDate.getMonth() + 1) + "/" + weekdayDate.getDate();
-            
-                var openTime = "";
-                var closeTime = "";
-            
-                if(holidaySchedules.hasOwnProperty(weekdayDateFormatted)) {
-                    schedule = holidaySchedules[weekdayDateFormatted];
-                } else {
-                    schedule = regularSchedules[weekday];
-                }
-                
-                if(schedule.open == true) {
-                    openTime = formatTime(schedule.openTime);
-                    closeTime = formatTime(schedule.closeTime);
-                } else {
-                    openTime = "Closed";
-                }
-                
-                const capitalizedWeekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
-                if(weekday == currentDateName && !storeClosedReason){
-                    scheduleHtml += `<tr><td class="fas-bold"><b>${capitalizedWeekday}</b></td><td class="fas-bold"><b>${openTime}</b></td><td class="fas-bold"><b>${closeTime}</b></td></tr>`;
-                } else {
-                    scheduleHtml += `<tr><td>${capitalizedWeekday}</td><td>${openTime}</td><td>${closeTime}</td></tr>`;
-                }
+                scheduleHtml += `<tr><td>${capitalizedWeekday}</td><td>${openTime}</td><td>${closeTime}</td></tr>`;
             }
-            scheduleHtml += "</table>";
-        
-            var locationHeader = "<h4>LOCATION INFO</h4>";
-            if(window.innerWidth <= 426) {
-                locationHeader = "";
-            }
+        }
+        scheduleHtml += "</table>";
+    
+        var locationHeader = "<h4>LOCATION INFO</h4>";
+        if(window.innerWidth <= 426) {
+            locationHeader = "";
+        }
 
-            var phone = store.PhoneNumber != null ? `<p><a href="tel:${store.PhoneNumber}" class="store-phone">${store.PhoneNumber}</a></p>` : `<p class="store-phone">${store["Closed Reason"]}</p>`
-        
-            const storePageMarkup = `
-                <div id="fas-back-btn">< Back to Stores</div>
-                <div class="sl-grid-title sl-grid-banner sl-halfw sl-centered">
-                    <h2>${store.Name}</h2>
+        var phone = store.PhoneNumber != null ? `<p><a href="tel:${store.PhoneNumber}" class="store-phone">${store.PhoneNumber}</a></p>` : `<p class="store-phone">${store["Closed Reason"]}</p>`
+    
+        const storePageMarkup = `
+            <div id="fas-back-btn">< Back to Stores</div>
+            <div class="sl-grid-title sl-grid-banner sl-halfw sl-centered">
+                <h2>${store.Name}</h2>
+                <div>
+                    ${storeStatus}
+                </div>
+            </div>
+            <div class="sl-grid-container">
+                <div class="sl-grid-locale sl-grid-item">
+                    ${locationHeader}
+                    <div class="left-text">
+                        <p>${store["Brand Name"]}</p>
+                        <p>${store.AddressOne}</p>
+                        <p>${store.City}, ${store.State} ${store.Zip}</p>
+                        <p>United States</p>
+                        <br>
+                        ${phone}
+                    </div>
                     <div>
-                        ${storeStatus}
+                        <a href="${store["Map Link"]}" target="_blank"><span class="sl-btn">GET DIRECTIONS</span></a>
                     </div>
                 </div>
-                <div class="sl-grid-container">
-                    <div class="sl-grid-locale sl-grid-item">
-                        ${locationHeader}
-                        <div class="left-text">
-                            <p>${store["Brand Name"]}</p>
-                            <p>${store.AddressOne}</p>
-                            <p>${store.City}, ${store.State} ${store.Zip}</p>
-                            <p>United States</p>
-                            <br>
-                            ${phone}
-                        </div>
-                        <div>
-                            <a href="${store["Map Link"]}" target="_blank"><span class="sl-btn">GET DIRECTIONS</span></a>
-                        </div>
-                    </div>
-                    <div class="sl-grid-hours sl-grid-item${hoursDisabled}">
-                        ${scheduleHtml}
-                    </div>
+                <div class="sl-grid-hours sl-grid-item${hoursDisabled}">
+                    ${scheduleHtml}
                 </div>
-                <div class="sl-careers sl-fullw sl-centered">
-                    <div class="sl-halfw">
-                        <h2>SCANDINAVIAN DESIGNS CAREERS</h2>
-                        <p>Learn more about our careers!</p>
-                        <a href="https://scandinaviandesigns.com/pages/careers-at-scandinavian-designs" target="_blank"><span class="sl-btn"><p>CURRENT OPENINGS</p></span></a>
-                    </div>
-                </div>`
-                
-            return storePageMarkup;
-
-            storePageContainer.append(storePageMarkup)
-        }
-
-        function handleStoreCardClick(layer) {
-            if(layer.classList.contains('state-header') || layer.classList.contains('state-container')) return
+            </div>
+            <div class="sl-careers sl-fullw sl-centered">
+                <div class="sl-halfw">
+                    <h2>SCANDINAVIAN DESIGNS CAREERS</h2>
+                    <p>Learn more about our careers!</p>
+                    <a href="https://scandinaviandesigns.com/pages/careers-at-scandinavian-designs" target="_blank"><span class="sl-btn"><p>CURRENT OPENINGS</p></span></a>
+                </div>
+            </div>`
             
-            if(layer.classList.contains("store-phone")) {
-                window.location.assign(layer.getAttribute("phoneLink"));
-                return;
-            }
-            
-            while(!layer.classList.contains('store-card-profile')){
-                layer = layer.parentNode;
-            }
+        return storePageMarkup;
 
-            if(layer.classList.contains('store-card-profile')) {
-                $url.searchParams.set("state", layer.parentNode.getAttribute("data"));
-                $url.searchParams.set("store", layer.getAttribute("handle"));
-                if(layer.getAttribute("search") == "true"){
-                    $url.searchParams.set("state", layer.getAttribute("state"));
-                }
-                window.history.replaceState({}, "", $url);
-                buildStorePage();
-            }
-        }
+        storePageContainer.append(storePageMarkup)
+    }
 
-        function handleContainerVisibility(show, ...args) {
-            for(let arg of args) {
-                if(arg != show) arg.classList.remove("cyp-visible");
-            }
-			setTimeout(() => {
-                for(let arg of args) arg.classList.add("cyp-hidden");
-	  			requestAnimationFrame(()=>{
-					show.classList.remove('cyp-hidden')
-					requestAnimationFrame(()=> {
-					    show.classList.add('cyp-visible')
-					    if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
-					})
-				})
-			}, "300")
-        }
-
-        storeListContainer.addEventListener('click', e => {
-            e.preventDefault()
-
-            var layer = e.target;
-
-            handleStoreCardClick(layer)
-        });
-
-        storePageContainer.addEventListener('click', e => {
-            e.preventDefault()
-            e.stopImmediatePropagation()
-            if(e.target.id == "fas-back-btn") {
-                $url.searchParams.delete("store");
-                $url.searchParams.delete("state");
-                window.history.replaceState({}, "", $url);
-                handleContainerVisibility(storeListContainer, storePageContainer, storeSearchContainer)
-            }
-	    });
-
-        storeSearchContainer.addEventListener('click', e => {
-            e.preventDefault()
-            e.stopImmediatePropagation()
-            if(e.target.id == "fas-back-btn") {
-                $url.searchParams.delete("store");
-                $url.searchParams.delete("state");
-                window.history.replaceState({}, "", $url);
-                handleContainerVisibility(storeListContainer, storePageContainer, storeSearchContainer)
-            }
-	    });
+    function handleStoreCardClick(layer) {
+        if(layer.classList.contains('state-header') || layer.classList.contains('state-container')) return
         
-        storeSearchContainer.addEventListener('click', e => {
-            e.preventDefault()
-
-            var layer = e.target;
-
-            handleStoreCardClick(layer)
-        });
-
-        searchBarInput.focus();
-        setTimeout(function(){ searchBarInput.selectionStart = searchBarInput.selectionEnd = 6; }, 0);
-
-        //  add 2 event listeners to zip input to validate input and fire on enter key
-        searchBarInput.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter'){
-                searchBarInput.focus();
-                searchBarSubmitBtn.click(); 
-            }
-        })
+        if(layer.classList.contains("store-phone")) {
+            window.location.assign(layer.getAttribute("phoneLink"));
+            return;
+        }
         
-        searchBarInput.addEventListener('input', (e) => {
-            e.preventDefault();
-            if(e.data != null && (!e.data.match(/^[0-9]$/) || searchBarInput.value.length > 5)) searchBarInput.value = searchBarInput.value.slice(0, -1)
-        })
+        while(!layer.classList.contains('store-card-profile')){
+            layer = layer.parentNode;
+        }
 
-        searchBarSubmitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            const searchValue = searchBarInput.value != "" ? searchBarInput.value : searchBarInput.placeholder;
-            
-            if(searchValue === "" || parseInt(searchValue) < 501 || parseInt(searchValue) > 99950 || searchValue.length < 5) {
-                if(searchValue.length < 5){
-                    searchPopup.innerText = INSUFFICIENT_ZIP_ERROR;
-                } else {
-                    searchPopup.innerText = MALFORMED_ZIP_ERROR
-                }
-                searchPopupZip.classList.remove("show");
-                searchPopup.classList.add("show");
+        if(layer.classList.contains('store-card-profile')) {
+            $url.searchParams.set("state", layer.parentNode.getAttribute("data"));
+            $url.searchParams.set("store", layer.getAttribute("handle"));
+            if(layer.getAttribute("search") == "true"){
+                $url.searchParams.set("state", layer.getAttribute("state"));
+            }
+            window.history.replaceState({}, "", $url);
+            buildStorePage();
+        }
+    }
+
+    function handleContainerVisibility(show, ...args) {
+        for(let arg of args) {
+            if(arg != show) arg.classList.remove("cyp-visible");
+        }
+        setTimeout(() => {
+            for(let arg of args) arg.classList.add("cyp-hidden");
+            requestAnimationFrame(()=>{
+                show.classList.remove('cyp-hidden')
+                requestAnimationFrame(()=> {
+                    show.classList.add('cyp-visible')
+                    if(window.innerWidth < 799) window.scrollTo({top: 200, behavior: 'smooth'});
+                })
+            })
+        }, "300")
+    }
+
+    storeListContainer.addEventListener('click', e => {
+        e.preventDefault()
+
+        var layer = e.target;
+
+        handleStoreCardClick(layer)
+    });
+
+    storePageContainer.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        if(e.target.id == "fas-back-btn") {
+            $url.searchParams.delete("store");
+            $url.searchParams.delete("state");
+            window.history.replaceState({}, "", $url);
+            handleContainerVisibility(storeListContainer, storePageContainer, storeSearchContainer)
+        }
+    });
+
+    storeSearchContainer.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        if(e.target.id == "fas-back-btn") {
+            $url.searchParams.delete("store");
+            $url.searchParams.delete("state");
+            window.history.replaceState({}, "", $url);
+            handleContainerVisibility(storeListContainer, storePageContainer, storeSearchContainer)
+        }
+    });
+    
+    storeSearchContainer.addEventListener('click', e => {
+        e.preventDefault()
+
+        var layer = e.target;
+
+        handleStoreCardClick(layer)
+    });
+
+    searchBarInput.focus();
+    setTimeout(function(){ searchBarInput.selectionStart = searchBarInput.selectionEnd = 6; }, 0);
+
+    //  add 2 event listeners to zip input to validate input and fire on enter key
+    searchBarInput.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter'){
+            searchBarInput.focus();
+            searchBarSubmitBtn.click(); 
+        }
+    })
+    
+    searchBarInput.addEventListener('input', (e) => {
+        e.preventDefault();
+        if(e.data != null && (!e.data.match(/^[0-9]$/) || searchBarInput.value.length > 5)) searchBarInput.value = searchBarInput.value.slice(0, -1)
+    })
+
+    searchBarSubmitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const searchValue = searchBarInput.value != "" ? searchBarInput.value : searchBarInput.placeholder;
+        
+        if(searchValue === "" || parseInt(searchValue) < 501 || parseInt(searchValue) > 99950 || searchValue.length < 5) {
+            if(searchValue.length < 5){
+                searchPopup.innerText = INSUFFICIENT_ZIP_ERROR;
+            } else {
+                searchPopup.innerText = MALFORMED_ZIP_ERROR
+            }
+            searchPopupZip.classList.remove("show");
+            searchPopup.classList.add("show");
+            searchBarInput.focus();
+            setTimeout(function(){
                 searchBarInput.focus();
-                setTimeout(function(){
-                    searchBarInput.focus();
-                }, 100); 
-                setTimeout(function(){
-                    searchPopup.classList.remove("show");
-                }, 3000); 
-            } else if(searchValue.match(/^[0-9]{5}$/)){
+            }, 100); 
+            setTimeout(function(){
+                searchPopup.classList.remove("show");
+            }, 3000); 
+        } else if(searchValue.match(/^[0-9]{5}$/)){
+        
+            const searchPayload = {"query": searchValue}
+            searchBarInput.placeholder = searchValue;
+            searchBarInput.value = "";
             
-                const searchPayload = {"query": searchValue}
-                searchBarInput.placeholder = searchValue;
-                searchBarInput.value = "";
-                
-                fetch("https://sdecommerceapi.azurewebsites.net/getNearbyStores", {
-                    method: "POST",
-                    body: JSON.stringify(searchPayload)})
-                    .then(response => response.json())
-                    .then(nearbyStores => {
+            fetch("https://sdecommerceapi.azurewebsites.net/getNearbyStores", {
+                method: "POST",
+                body: JSON.stringify(searchPayload)})
+                .then(response => response.json())
+                .then(nearbyStores => {
+                    
+                //	Remove previous search results
+                    const $searchPage = document.querySelector("#state-container-search");
+                    const previousItems = $searchPage.querySelectorAll(".fas-item");
+                    for(const child of previousItems) {
+                        setTimeout(() => {
+                            child.remove();
+                        }, 299); 
+                    }
+
+                    if(nearbyStores != null && !nearbyStores.hasOwnProperty("error")) {
+                    
+                        var storeDistances = new Int16Array(Object.keys(nearbyStores));
+                        storeDistances.sort();
                         
-                    //	Remove previous search results
-                        const $searchPage = document.querySelector("#state-container-search");
-                        const previousItems = $searchPage.querySelectorAll(".fas-item");
-                        for(const child of previousItems) {
+                        $url.searchParams.set("state", nearbyStores[storeDistances[0]].state);
+                        $url.searchParams.delete("store");
+                        window.history.replaceState({}, "", $url);
+                        
+                    // set and build each store location
+                        for(const storeDistance of storeDistances) {
+                            const storeMap = nearbyStores[storeDistance];
+                            const store = stores[storeMap.state]["stores"][storeMap.store];
+                            const storeCardProfile = document.createElement('div')
+                            storeCardProfile.classList.add('card-store-profile', 'fas-item')
+                            storeCardProfile.setAttribute("handle", store.Handle);
+                            storeCardProfile.setAttribute("search", "true");
+                            storeCardProfile.setAttribute("state", storeMap.state);	
+                            storeCardProfile.innerHTML = assembleStoreCardHtml(store, storeDistance);
+                            
                             setTimeout(() => {
-                                child.remove();
+                                $searchPage.append(storeCardProfile)
                             }, 299); 
                         }
-
-                        if(nearbyStores != null && !nearbyStores.hasOwnProperty("error")) {
+                        setTimeout(() => {
+                            document.querySelector("#search-container-header").innerText = "Stores near " + searchValue;
+                        }, 299); 
                         
-                            var storeDistances = new Int16Array(Object.keys(nearbyStores));
-                            storeDistances.sort();
-                            
-                            $url.searchParams.set("state", nearbyStores[storeDistances[0]].state);
-                            $url.searchParams.delete("store");
-                            window.history.replaceState({}, "", $url);
-                            
-                        // set and build each store location
-                            for(const storeDistance of storeDistances) {
-                                const storeMap = nearbyStores[storeDistance];
-                                const store = stores[storeMap.state]["stores"][storeMap.store];
-                                const storeCardProfile = document.createElement('div')
-                                storeCardProfile.classList.add('card-store-profile', 'fas-item')
-                                storeCardProfile.setAttribute("handle", store.Handle);
-                                storeCardProfile.setAttribute("search", "true");
-                                storeCardProfile.setAttribute("state", storeMap.state);	
-                                storeCardProfile.innerHTML = assembleStoreCardHtml(store, storeDistance);
-                                
-                                setTimeout(() => {
-                                    $searchPage.append(storeCardProfile)
-                                }, 299); 
-                            }
-                            setTimeout(() => {
-                                document.querySelector("#search-container-header").innerText = "Stores near " + searchValue;
-                            }, 299); 
-                            
-                        } else {
-                            setTimeout(() => {
-                                document.querySelector("#search-container-header").innerText = "No stores near " + searchValue;
-                                const emptySearchResult = document.createElement('div')
-                                emptySearchResult.innerHTML = `<div class="fas-empty-search-result fas-item"><p>No stores found near you<p></div>`;
-                                $searchPage.append(emptySearchResult)
-                            }, 299);
-                        } 
-                        handleContainerVisibility(storeSearchContainer, storeListContainer, storePageContainer)
-                    });
-            }
-	    });
-
-        storeListContainer.addEventListener('click', e => {
-            if(e.target.localName == "h2") {
-                let stateContainer = e.target.parentNode.children[2]
-                stateContainer.classList.toggle('fas-collapsed')
-            } else {
-                return
-            }
-        })
-
-        function toggleAccordionOnMobile() {
-            document.querySelectorAll('.fas-accordion-wrapper').forEach(drawer => drawer.classList.toggle('fas-collapsed'))
+                    } else {
+                        setTimeout(() => {
+                            document.querySelector("#search-container-header").innerText = "No stores near " + searchValue;
+                            const emptySearchResult = document.createElement('div')
+                            emptySearchResult.innerHTML = `<div class="fas-empty-search-result fas-item"><p>No stores found near you<p></div>`;
+                            $searchPage.append(emptySearchResult)
+                        }, 299);
+                    } 
+                    handleContainerVisibility(storeSearchContainer, storeListContainer, storePageContainer)
+                });
         }
+    });
 
+    storeListContainer.addEventListener('click', e => {
+        if(e.target.localName == "h2") {
+            let stateContainer = e.target.parentNode.children[2]
+            stateContainer.classList.toggle('fas-collapsed')
+        } else {
+            return
+        }
+    })
+
+    function toggleAccordionOnMobile() {
+        document.querySelectorAll('.fas-accordion-wrapper').forEach(drawer => drawer.classList.toggle('fas-collapsed'))
+    }
+
+    if(window.innerWidth < 1025) {
+        setTimeout(toggleAccordionOnMobile, 100)
+    }
+
+    window.addEventListener('resize', e => {
         if(window.innerWidth < 1025) {
-            setTimeout(toggleAccordionOnMobile, 100)
+        setTimeout(toggleAccordionOnMobile, 100)
         }
-
-        window.addEventListener('resize', e => {
-            if(window.innerWidth < 1025) {
-            setTimeout(toggleAccordionOnMobile, 100)
-            }
-        })
-    </script>
+    })
+</script>

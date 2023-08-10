@@ -972,12 +972,6 @@ buildStateInterface(fakeData)
                     
                 //	Remove previous search results
                     const $searchPage = document.querySelector("#state-container-search");
-                    const previousItems = $searchPage.querySelectorAll(".fas-item");
-                    for(const child of previousItems) {
-                        setTimeout(() => {
-                            child.remove();
-                        }, 299); 
-                    }
 
                     if(nearbyStores != null && !nearbyStores.hasOwnProperty("error")) {
                     

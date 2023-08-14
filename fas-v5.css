@@ -423,6 +423,85 @@ th {
 .hours-disabled {
 	color: #999;
 }
+
+/* ------------------------------------------------------------[pop-ups] ----------------------------------------------- */
+
+.popup {
+    position: relative;
+    display: block;
+    z-index:40;
+}
+.popup .popuptext-zip {
+    visibility: hidden;
+    width: 200px;
+    background-color: rgba(1, 1, 1, 0.85);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 40;
+    bottom: 42px;
+    left: 50%;
+    margin-left: -100px;
+}
+.popup .popuptext-quantity {
+    visibility: hidden;
+    width: 260px;
+    background-color: rgba(1, 1, 1, 0.85);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 40;
+    bottom: 58px;
+    left: 50%;
+    margin-left: -48px;
+}
+/* Popup arrow */
+.popup .popuptext-zip::after, .popuptext-quantity::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+.popup .swatch-popuptext {
+    visibility: hidden;
+    width: 130px;
+    background-color: rgba(1, 1, 1, 0.85);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 40;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -65px;
+}
+/* Popup arrow */
+.popup .swatch-popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+    z-index:40;
+}
  /* --------------------------------------------------------------------------media queries */ 
 
  @media only screen and (max-width: 1500px) {
@@ -457,6 +536,34 @@ th {
     #fas-subheader--logo {
         width: 70%;
     }
+    td {
+        text-align: left;
+    }
+    .sl-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-flow: row;
+    }
+    .page-sidebar-container.content {
+        padding: 0;
+    }
+    h2 {
+        text-align: center;
+    }
+    .sl-halfw {
+        width: 100%;
+    }
+    .sl-grid-item {
+        width: 100%
+    }
+    .sl-img-div, .sl-img {
+        width: 100%;
+    }
+    .sl-careers {
+        margin-top: 30px;
+    }
+    .fas-open-status {
+        margin-bottom: 20px;
+    }
  }
  @media only screen and (max-width: 425px) {
     #fas-header--headline {
@@ -467,5 +574,34 @@ th {
     }
     .store-card-profile {
         width: 44%;
+    }
+    .sl-grid-container {
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-flow: row;
+        gap: 20px 0;
+        text-align: center;
+    }
+    .page-sidebar-container.content {
+        padding: 0;
+    }
+    h2 {
+        text-align: center;
+    }
+    .sl-halfw {
+        width: 100%;
+    }
+    .sl-grid-item {
+        width: 100%;
+    }
+    table {
+        margin: 0 auto;
+    }
+    .sl-img-div, .sl-img {
+        width: 100%;
+        text-align: center;
+    }
+    .sl-careers .sl-btn {
+        width: 200px;
+        margin: 10px 0;
     }
  }

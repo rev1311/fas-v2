@@ -1,8 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 body {
     font-size: 14px;
 }
@@ -10,12 +5,10 @@ a {
     color: #333;
     text-decoration: none;
 }
-
 .flex-break {
     flex-basis: 100%;
     height: 0;
 }
-
 .fas-hidden {
     opacity: 0;
     max-height: 0;
@@ -38,6 +31,7 @@ a {
     background-color: #fff;
     transition: all 0.3s ease-in-out;
 }
+
 /* -------------------------------------------------------------------header grid container */
 #fas-grid--header {
     width: 100%;
@@ -146,10 +140,12 @@ a {
     margin: 0 auto;
 }
 #fas-data--storelist {
-    background-color: #ec5050;
+    background-color: #fff;
+    transition: opacity 0.2s ease-in;
 }
 #fas-data--storepage {
-    background-color: aqua;
+    background-color: #fff;
+    transition: opacity 0.2s ease-in;
     z-index: 20;
 }
 .state-container {

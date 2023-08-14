@@ -9,13 +9,16 @@ a {
     flex-basis: 100%;
     height: 0;
 }
-.fas-hidden {
-    opacity: 0;
-    max-height: 0;
-    transition: all 0.3s ease-in-out;
-}
 .fas-bold {
     font-weight: 700;
+}
+.cyp-visible {
+	opacity: 1 !important;
+    transition: all 0.3s ease-in-out;
+}
+.cyp-hidden {
+	display: none !important;
+    transition: all 0.3s ease-in-out;
 }
 
 /* --------------------------------------------------------------------main grid container */
@@ -31,7 +34,6 @@ a {
     background-color: #fff;
     transition: all 0.3s ease-in-out;
 }
-
 /* -------------------------------------------------------------------header grid container */
 #fas-grid--header {
     width: 100%;
@@ -139,15 +141,6 @@ a {
     background-color: #fff;
     margin: 0 auto;
 }
-#fas-data--storelist {
-    background-color: #fff;
-    transition: opacity 0.2s ease-in;
-}
-#fas-data--storepage {
-    background-color: #fff;
-    transition: opacity 0.2s ease-in;
-    z-index: 20;
-}
 .state-container {
     display: flex;
     flex-wrap: wrap;
@@ -155,6 +148,9 @@ a {
     max-height: 4000px;
     opacity: 1;
     transition: all 0.3s ease-in-out;
+}
+#state-container-search {
+    margin-bottom: 50px;
 }
 .state-header {
     color: #333;
@@ -174,15 +170,29 @@ a {
 /* --------------------------------------------------------------------store cards */
 .store-card-profile {
     background-color: #fff;
-    width: 215px;
+    width: 225px;
     border-radius: 0.25rem;
     margin: 10px;
+    padding: 10px 15px;
     cursor: pointer;
     opacity: 1;
     transition: 0.2s ease-in;
     z-index: 1000;
 }
-.fas-store-card-phone {
+.store-card-profile:active,
+.store-card-profile:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: 0.2s ease-in;
+}
+.fas-store-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.10em;
+    margin-bottom: 5px;
+}
+.fas-store-phone {
     position: absolute;
     right: 10px;
     top: 10px;
@@ -195,9 +205,9 @@ a {
 .store-phone::after {
     content: '';
     width: 0%;
-    height: 2px;
+    height: 1px;
     display: block;
-    background-color: #fff;
+    background-color: #333;
 	transition: width 0.3s cubic-bezier(.5, .24, 0, 1);
 }
 .store-phone:hover::after {
@@ -247,8 +257,7 @@ a {
     visibility: hidden;
     max-height: 0;
   }
-  .fas-accordion-wrapper.fas-collapsed:after
-  {
+  .fas-accordion-wrapper.fas-collapsed:after {
     height: 0;
     transition: height 0.2s linear;
     max-height: 50px;
@@ -413,14 +422,6 @@ th {
 }
 .hours-disabled {
 	color: #999;
-}
-
-.cyp-visible {
-	opacity: 1 !important;
-}
-
-.cyp-hidden {
-	display: none !important;
 }
  /* --------------------------------------------------------------------------media queries */ 
 

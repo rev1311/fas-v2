@@ -182,7 +182,7 @@ a {
     transition: 0.2s ease-in;
     z-index: 1000;
 }
-.fas-store-phone {
+.fas-store-card-phone {
     position: absolute;
     right: 10px;
     top: 10px;
